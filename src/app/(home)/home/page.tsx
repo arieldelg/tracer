@@ -1,22 +1,17 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
-// import { headers } from "next/headers";
 import ClientWrappe from "@/components/ClientWrappe";
 import ContactCard from "@/components/ContactCard";
 
-const Home = async () => {
-  // const url = headers();
-  // const urlSplit = url.get("custom-header")?.split("/")[1];
-  // console.log(urlSplit);
-
+const Home = () => {
   return (
     <section className="w-full h-auto">
       <ClientWrappe>
         {
           // ! section High Tracers
         }
-        <div className="p-4">
+        <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <p className="text-[30px] pr-2">1</p>
             <BsExclamationDiamond
@@ -39,7 +34,7 @@ const Home = async () => {
         {
           // ! section Medium Tracers
         }
-        <div className="p-4">
+        <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             {/* <p>0</p> */}
             <HiOutlineExclamationTriangle
@@ -59,7 +54,7 @@ const Home = async () => {
         {
           // ! section Lower Tracers
         }
-        <div className="p-4">
+        <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <BsExclamationCircle
               size={30}
@@ -76,12 +71,14 @@ const Home = async () => {
         {
           // ! section Contacts
         }
-        <div className="p-4">
+        <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <UsersIcon className="w-8" />
             <h2 className="text-xl font-bold">Contacts</h2>
           </div>
-          <div className="py-4">
+          <div className="py-6 space-y-4">
+            <ContactCard />
+            <ContactCard />
             <ContactCard />
           </div>
         </div>

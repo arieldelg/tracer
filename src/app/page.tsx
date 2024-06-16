@@ -1,6 +1,9 @@
 // import Navbar from "@/components/Navbar";
 
-export default function Home() {
+import { db } from "@/lib/db";
+
+export default async function Home() {
+  await db.set("hello", "ariel");
   return (
     <main className=" w-screen">
       {
