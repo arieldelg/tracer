@@ -1,6 +1,7 @@
 "use client";
-import { useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, ChangeEvent } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import Input from "@/components/Input";
 
 const Search = () => {
   const [value, setValue] = useState<string>("");
@@ -14,14 +15,11 @@ const Search = () => {
       <div className="space-y-4">
         <h1 className="text-2xl">Search:</h1>
         <div className="flex border shadow-3xl px-4 rounded-xl">
-          <input
-            name="search"
-            id="search"
-            placeholder="Type anything"
-            className="w-full h-16  outline-none bg-transparent p-2  text-xl"
-            onChange={(e) => setValue(e.target.value)}
-            onKeyDown={(event) => enterSearch(event)}
-            // onKeyDown={(e) => enterSearch(e)}
+          <Input
+            setValue={setValue}
+            value={value}
+            enterSearch={enterSearch}
+            type="text"
           />
           <MagnifyingGlassIcon className="w-10" />
         </div>

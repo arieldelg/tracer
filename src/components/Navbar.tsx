@@ -20,7 +20,7 @@ const Navbar = () => {
         <HomeIcon className="w-8" onClick={() => router.push("/home")} />
         <MagnifyingGlassIcon
           className="w-8"
-          onClick={() => router.push("search")}
+          onClick={() => router.push("/search")}
         />
         <UserIcon className="w-8" onClick={() => router.push("/profile")} />
       </div>

@@ -3,14 +3,17 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ClientWrappe from "@/components/ClientWrappe";
 import ContactCard from "@/components/ContactCard";
+import ButtonAddTracer from "@/components/ButtonAddTracer";
 
 const Home = () => {
   return (
-    <section className="w-full h-auto">
+    <>
+      <ButtonAddTracer />
       <ClientWrappe>
         {
           // ! section High Tracers
         }
+
         <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <p className="text-[30px] pr-2">1</p>
@@ -31,9 +34,11 @@ const Home = () => {
             </ul>
           </div>
         </div>
+
         {
           // ! section Medium Tracers
         }
+
         <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             {/* <p>0</p> */}
@@ -51,9 +56,11 @@ const Home = () => {
             </ul>
           </div>
         </div>
+
         {
           // ! section Lower Tracers
         }
+
         <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <BsExclamationCircle
@@ -68,9 +75,11 @@ const Home = () => {
             </ul>
           </div>
         </div>
+
         {
           // ! section Contacts
         }
+
         <div className="">
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <UsersIcon className="w-8" />
@@ -83,7 +92,7 @@ const Home = () => {
           </div>
         </div>
       </ClientWrappe>
-    </section>
+    </>
   );
 };
 
