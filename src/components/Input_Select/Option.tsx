@@ -9,7 +9,7 @@ const Option = ({ last, name, handleSelectOption }: PropsOption) => {
     <div
       className={`text-2xl ${
         last ? null : "border-b"
-      } font-bold w-full h-16 flex items-center p-4 `}
+      } font-bold w-full h-16 flex items-center p-4`}
       onClick={() => handleSelectOption(name)}
     >
       <p>{name}</p>

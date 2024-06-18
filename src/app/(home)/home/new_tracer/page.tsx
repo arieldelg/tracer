@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Select from "@/components/Input_Select/Select";
 import { useState } from "react";
@@ -6,9 +7,12 @@ import { useState } from "react";
 const NewTracer = () => {
   const [value, setValue] = useState<string>("");
   const [select, setSelect] = useState<string>("");
-  console.log(select);
+
   return (
     <section className="space-y-8">
+      {
+        // ! Here goes the label and input of title
+      }
       <div className="flex flex-col space-y-4">
         <label htmlFor="title" className="text-3xl font-bold">
           Title
@@ -26,24 +30,39 @@ const NewTracer = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col space-y-4">
-        <label htmlFor="priority-select" className="text-3xl font-bold">
+      {
+        // ! Here goes the label and input of Select-Option
+      }
+      <div className="flex flex-col space-y-4 z-40 w-full">
+        <label htmlFor="priority" className="text-3xl font-bold">
           Priority
         </label>
         <Select
           optionsSelect={["High", "Medium", "Low"]}
           setSelect={setSelect}
+          select={select}
         />
-        {/* <select
-          name="priority"
-          id="priority-select"
-          className="h-16 bg-transparent border rounded-xl text-xl p-2"
-          onChange={handleSelect}
-        >
-          <option value="">--Please choose an option</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-        </select> */}
+      </div>
+      {
+        // ! Here goes the label and text of the tracer
+      }
+      <div className="flex flex-col space-y-4">
+        <label htmlFor="text" className="text-3xl font-bold ">
+          Text
+        </label>
+        <textarea
+          name="text"
+          id="text"
+          className="bg-transparent border rounded-lg h-56 p-2 outline-none text-xl shadow-3xl"
+          placeholder="Write something..."
+        />
+      </div>
+      {
+        // ! here goes the button to cancel or save the tracer
+      }
+      <div className="flex justify-between space-x-4">
+        <Button name="Cancel" color="red" url="back" />
+        <Button name="Save" color="green" />
       </div>
     </section>
   );

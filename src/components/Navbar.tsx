@@ -17,12 +17,12 @@ const Navbar = () => {
         <h1 className="text-center text-3xl font-bold p-4">Tracer-Track</h1>
       </div>
       <div className="flex justify-between px-4 pb-4">
-        <HomeIcon className="w-8" onClick={() => router.push("/home")} />
+        <HomeIcon className="w-8" onClick={() => router.replace("/home")} />
         <MagnifyingGlassIcon
           className="w-8"
-          onClick={() => router.push("/search")}
+          onClick={() => router.replace("/search")}
         />
-        <UserIcon className="w-8" onClick={() => router.push("/profile")} />
+        <UserIcon className="w-8" onClick={() => router.replace("/profile")} />
       </div>
     </section>
   );

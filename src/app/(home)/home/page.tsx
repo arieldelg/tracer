@@ -5,16 +5,25 @@ import ClientWrappe from "@/components/ClientWrappe";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
 
-const Home = () => {
+const Home = async () => {
+  const response = await fetch("http://localhost:3001/api/addTracer");
+  const data = await response.json();
+  console.log(data);
   return (
     <>
+      {
+        // ! button to add more tracers
+      }
       <ButtonAddTracer />
+      {
+        // ! here starts my client component
+      }
       <ClientWrappe>
         {
           // ! section High Tracers
         }
 
-        <div className="">
+        <div>
           <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
             <p className="text-[30px] pr-2">1</p>
             <BsExclamationDiamond
