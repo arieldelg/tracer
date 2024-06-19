@@ -11,7 +11,7 @@ const Search = () => {
     }
   };
   return (
-    <section className="w-full h-auto px-6 py-4">
+    <section className="w-full h-auto">
       <div className="space-y-4">
         <h1 className="text-2xl">Search:</h1>
         <div className="flex border shadow-3xl px-4 rounded-xl">
