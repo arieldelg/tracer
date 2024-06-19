@@ -5,10 +5,10 @@ import ClientWrappe from "@/components/ClientWrappe";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
 
-const Home = async () => {
-  const response = await fetch("http://localhost:3001/api/addTracer");
-  const data = await response.json();
-  console.log(data);
+const Home = () => {
+  // const response = await fetch("http://localhost:3001/api/addTracer");
+  // const data = await response.json();
+  // console.log(data);
   return (
     <>
       {
