@@ -6,11 +6,17 @@ import {
 } from "@heroicons/react/24/solid";
 import LinkComponent from "./Link";
 
+{
+  // ! type of Routes
+}
+
 type TypeRoutes = {
   url: string;
   icon?: any;
   text?: string;
 };
+
+// ! array of routes
 
 const routes: TypeRoutes[] = [
   {
