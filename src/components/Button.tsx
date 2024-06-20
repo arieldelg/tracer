@@ -1,4 +1,5 @@
-import { url } from "inspector";
+"use client";
+import { NextFont } from "next/dist/compiled/@next/font";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -6,6 +7,9 @@ type Props = {
   name: string;
   color: string;
   url?: string;
+  children?: React.ReactNode;
+  onlyOne: boolean;
+  font?: string;
 };
 
 const Button = (props: Props) => {
@@ -28,18 +32,27 @@ const Button = (props: Props) => {
   if (props.url === "back") {
     return (
       <button
-        className={`w-1/2 h-16 ${handleColor()} rounded-lg border text-2xl font-bold`}
+        className={`${
+          props.onlyOne ? "w-full" : "w-1/2"
+        } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
+          props.children ? "flex items-center justify-center gap-4 px-4" : null
+        } ${props.font && props.font}
+        `}
         onClick={() => router.back()}
       >
-        {props.name}
+        {props.children} {props.name}
       </button>
     );
   } else {
     return (
       <button
-        className={`w-1/2 h-16 ${handleColor()} rounded-lg border text-2xl font-bold`}
+        className={`${
+          props.onlyOne ? "w-full" : "w-1/2"
+        } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
+          props.children ? "flex items-center justify-center gap-4 px-4" : null
+        } ${props.font && props.font}`}
       >
-        {props.name}
+        {props.children} {props.name}
       </button>
     );
   }
