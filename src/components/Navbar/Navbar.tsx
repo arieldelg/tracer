@@ -69,7 +69,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
         // ! side Menu component
       }
       <div
-        className={`absolute bottom-0 left-0  w-5/6 h-screen z-50 ${
+        className={`absolute bottom-0 left-0  w-5/6 h-full z-50 ${
           open
             ? "transition-all translate-x-0 duration-300"
             : "transition-all -translate-x-[calc(100%+72px)] duration-500"
