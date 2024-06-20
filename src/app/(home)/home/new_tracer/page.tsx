@@ -61,8 +61,8 @@ const NewTracer = () => {
         // ! here goes the button to cancel or save the tracer
       }
       <div className="flex justify-between space-x-4">
-        <Button name="Cancel" color="red" url="back" />
-        <Button name="Save" color="green" />
+        <Button name="Cancel" color="red" url="back" onlyOne={false} />
+        <Button name="Save" color="green" onlyOne={false} />
       </div>
     </section>
   );
