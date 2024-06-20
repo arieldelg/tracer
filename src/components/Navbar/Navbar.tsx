@@ -69,13 +69,17 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
         // ! side Menu component
       }
       <div
-        className={`absolute bottom-0 left-0  w-5/6 h-full z-50 ${
+        className={`absolute top-0 left-0  w-5/6 h-screen z-50 ${
+          open
+            ? document.body.classList.add("overflow-hidden")
+            : document.body.classList.remove("overflow-hidden")
+        } ${
           open
             ? "transition-all translate-x-0 duration-300"
             : "transition-all -translate-x-[calc(100%+72px)] duration-500"
         }`}
       >
-        <div className="w-full h-full  bg-[#222222] border-r border-white/50 rounded-r-xl p-4">
+        <div className="w-full h-screen  bg-[#222222] border-r border-white/50 rounded-r-xl p-4">
           <div className="flex items-center space-x-4 h-[5%]">
             <button onClick={() => setOpen(false)}>
               <ReplyIcon size={40} className="" />
@@ -95,7 +99,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
           // ! the blur effect
         }
         <div
-          className={`absolute top-0 -right-[72px] w-[86px] h-screen -z-50 ${
+          className={`absolute top-0 left-0 w-screen h-screen -z-50 ${
             open ? " bg-white/5 backdrop-blur-[5px]" : null
           }  `}
         ></div>

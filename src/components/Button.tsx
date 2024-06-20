@@ -1,5 +1,4 @@
 "use client";
-import { NextFont } from "next/dist/compiled/@next/font";
 import { useRouter } from "next/navigation";
 import React from "react";
 

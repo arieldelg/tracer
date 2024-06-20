@@ -7,7 +7,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { roboto } from "../fonts";
 import Button from "@/components/Button";
 
-const Settings = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   console.log("hola layout");
   return (
     <main className="relative">
@@ -48,11 +48,11 @@ const Settings = ({ children }: { children: React.ReactNode }) => {
           </div>
         </>
       </Navbar>
-      <div className="w-full h-[calc(100vh-130px)] relative px-6 py-4">
-        {children}
-      </div>
+      <div className="w-full h-auto relative px-6 py-4">{children}</div>
     </main>
   );
 };
 
-export default Settings;
+//[calc(100vh-130px)]
+
+export default Layout;
