@@ -6,7 +6,7 @@ import {
   HomeIcon,
 } from "@heroicons/react/24/solid";
 import LinkComponent from "./Link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReplyIcon } from "@primer/octicons-react";
 import { roboto } from "@/app/fonts";
 
@@ -37,6 +37,21 @@ const routes: TypeRoutes[] = [
 
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [_document, set_Document] = useState<Document>();
+  useEffect(() => {
+    set_Document(document);
+  }, []);
+  const handleOpen = () => {
+    if (open) {
+      if (_document !== undefined) {
+        return document.body.classList.add("overflow-hidden");
+      }
+    } else if (open === false) {
+      if (_document !== undefined) {
+        return document.body.classList.remove("overflow-hidden");
+      }
+    }
+  };
   return (
     <section className={`border-b-2 border-white/20`}>
       {
@@ -69,11 +84,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
         // ! side Menu component
       }
       <div
-        className={`absolute top-0 left-0  w-5/6 h-screen z-50 ${
-          open
-            ? document.body.classList.add("overflow-hidden")
-            : document.body.classList.remove("overflow-hidden")
-        } ${
+        className={`absolute top-0 left-0  w-5/6 h-screen z-50 ${handleOpen()} ${
           open
             ? "transition-all translate-x-0 duration-300"
             : "transition-all -translate-x-[calc(100%+72px)] duration-500"

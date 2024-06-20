@@ -1,5 +1,5 @@
 "use client";
-import { useState, KeyboardEvent, ChangeEvent } from "react";
+import { useState, KeyboardEvent } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Input from "@/components/Input";
 
