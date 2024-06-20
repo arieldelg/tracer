@@ -3,6 +3,10 @@ import { useState, KeyboardEvent } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Input from "@/components/Input";
 
+{
+  // ! this is the Search Page
+}
+
 const Search = () => {
   const [value, setValue] = useState<string>("");
   const enterSearch = (event: KeyboardEvent<HTMLInputElement>) => {

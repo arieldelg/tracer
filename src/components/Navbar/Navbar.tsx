@@ -38,9 +38,17 @@ const routes: TypeRoutes[] = [
 const Navbar = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [_document, set_Document] = useState<Document>();
+
+  {
+    // ! aqui estoy mostrando que lo guardo en un estado
+  }
   useEffect(() => {
     set_Document(document);
   }, []);
+
+  {
+    // ! para vercel es necesario checar si document no es undefined, en este caso yo cheque si no era undefined y lo guarde en un estado
+  }
   const handleOpen = () => {
     if (open) {
       if (_document !== undefined) {
@@ -52,6 +60,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
       }
     }
   };
+
   return (
     <section className={`border-b-2 border-white/20`}>
       {
@@ -81,7 +90,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       {
-        // ! side Menu component
+        // ! side Menu component the complete component
       }
       <div
         className={`absolute top-0 left-0  w-5/6 h-screen z-50 ${handleOpen()} ${
@@ -90,10 +99,13 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             : "transition-all -translate-x-[calc(100%+72px)] duration-500"
         }`}
       >
+        {
+          // ! aqui adentro se encuentra el titulo del sideMenu y el children donde se van a renderizar lo demas del sideMenu, se uso children para que se siga trabajando con side server component
+        }
         <div className="w-full h-screen  bg-[#222222] border-r border-white/50 rounded-r-xl p-4">
-          <div className="flex items-center space-x-4 h-[5%]">
+          <div className="flex items-center space-x-4 h-[10%]">
             <button onClick={() => setOpen(false)}>
-              <ReplyIcon size={40} className="" />
+              <ReplyIcon size={40} />
             </button>
             <h1
               className={`text-3xl font-bold text-center ${roboto.className}`}
@@ -101,13 +113,13 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
               Welcome Ariel
             </h1>
           </div>
-          <div className="w-full flex flex-col justify-between h-[95%] pt-4">
+          <div className="w-full flex flex-col justify-between h-[90%] pt-4">
             {children}
           </div>
         </div>
 
         {
-          // ! the blur effect
+          // ! the blur effect es un div sin nada adentro, con el classname de absolute
         }
         <div
           className={`absolute top-0 left-0 w-screen h-screen -z-50 ${
