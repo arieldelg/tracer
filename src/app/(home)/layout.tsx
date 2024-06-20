@@ -35,7 +35,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                       url={element.url}
                       icon={element.icons}
                       text={element.text}
-                      font={roboto.className}
                     />
                   </li>
                 );

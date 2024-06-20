@@ -5,19 +5,16 @@ import { usePathname } from "next/navigation";
 
 type PropsLink = {
   url: string;
-  icon?: any;
+  icon?: JSX.Element;
   text?: string;
-  font?: string;
 };
 
 const LinkComponent = (props: PropsLink) => {
-  const [isActive, setIsActive] = useState<string>("");
-  const [icon, setIcon] = useState<any>();
+  const [icon, setIcon] = useState<JSX.Element>();
   const [text, setText] = useState<string>();
   const [one, setOne] = useState<boolean>(false);
   const url = usePathname();
   useEffect(() => {
-    setIsActive(url);
     if (props.icon && props.text) {
       setText(props.text);
       setIcon(props.icon);
@@ -28,15 +25,19 @@ const LinkComponent = (props: PropsLink) => {
       setOne(true);
       setText(props.text);
     }
-  }, [url, props.icon, props.text]);
+  }, [props.icon, props.text]);
   return (
     <Link
       href={props.url}
-      className={`${
-        isActive === props.url ? "text-green-500 w-8 scale-150" : "w-8"
-      } ${one ? null : "flex space-x-4 py-[4px] justify-between items-center"}`}
+      className={` ${one ? null : "flex space-x-4 py-[4px] items-center"}`}
     >
-      <p>{icon}</p>
+      <p
+        className={`${
+          url === props.url ? "text-green-500 w-8 scale-150" : "w-8"
+        }`}
+      >
+        {icon}
+      </p>
       <p className={`text-3xl`}>{text}</p>
     </Link>
   );
