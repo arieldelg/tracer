@@ -2,12 +2,12 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Select from "@/components/Input_Select/Select";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const NewTracer = () => {
   const [value, setValue] = useState<string>("");
+  const [textarea, setTextArea] = useState<string>("");
   const [select, setSelect] = useState<string>("");
-
   return (
     <section className="space-y-8">
       {
@@ -55,6 +55,10 @@ const NewTracer = () => {
           id="text"
           className="bg-transparent border rounded-lg h-56 p-2 outline-none text-xl shadow-3xl"
           placeholder="Write something..."
+          value={textarea}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+            setTextArea(e.target.value)
+          }
         />
       </div>
       {
@@ -62,7 +66,16 @@ const NewTracer = () => {
       }
       <div className="flex justify-between space-x-4">
         <Button name="Cancel" color="red" url="back" onlyOne={false} />
-        <Button name="Save" color="green" onlyOne={false} />
+        <Button
+          name="Save"
+          color="green"
+          onlyOne={false}
+          fetch={{
+            title: value,
+            priority: select,
+            text: textarea,
+          }}
+        />
       </div>
     </section>
   );

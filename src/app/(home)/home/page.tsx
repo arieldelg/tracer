@@ -3,11 +3,11 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
+import getAllTracers from "@/app/api/getAllTracers";
 
-const Home = () => {
-  // const response = await fetch("http://localhost:3001/api/addTracer");
-  // const data = await response.json();
-  // console.log(data);
+const Home = async () => {
+  const data = await getAllTracers();
+  console.log(data, "perro");
   return (
     <>
       {
