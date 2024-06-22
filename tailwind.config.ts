@@ -17,6 +17,7 @@ const config: Config = {
         // ! en este orden: derecha a izquierda, arriba - abajo, difuminacion (intensidad), longitud
         "3xl": "-5px 5px 30px 5px rgba(0,0,0,.6)",
         "4xl": "50px 0px 30px 20px rgba(0,0,0,.6)",
+        "5xl": "0px 0px 30px 30px rgba(0,0,0,.6)",
       },
     },
   },
