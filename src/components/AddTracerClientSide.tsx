@@ -22,7 +22,7 @@ const AddTracerClientSide = () => {
 
     setSend(true);
     const response = await fetch(
-      `${process.env.SERVER_ACTIONS_ENDPOINTS}/api/postTracer`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/postTracer`,
       {
         method: "POST",
         headers: {
