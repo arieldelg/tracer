@@ -3,8 +3,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Input_Select/Select";
-import { addTracerServerAction } from "@/services/actions";
+// import { addTracerServerAction } from "@/services/actions";
 import { CiCircleCheck } from "react-icons/ci";
+import { FaRegCircleXmark } from "react-icons/fa6";
 import { roboto } from "@/app/fonts";
 
 type Response = {
@@ -17,44 +18,80 @@ const AddTracerClientSide = () => {
   const [value, setValue] = useState<string>("");
   const [textarea, setTextArea] = useState<string>("");
   const [select, setSelect] = useState<string>("");
-  const [status, setStatus] = useState<Response>();
-  const [ok, setOk] = useState<boolean>();
+  const [status, setStatus] = useState<{ ok: boolean; message: string }>();
+  const [send, setSend] = useState<boolean>();
   const handleSendData = async () => {
     setValue("");
     setTextArea("");
     setSelect("");
-    const response = await addTracerServerAction({
-      title: value,
-      priority: select,
-      text: textarea,
-      url: "http://localhost:3000/api/postTracer",
+    // const response = await addTracerServerAction({
+    //   title: value,
+    //   priority: select,
+    //   text: textarea,
+    //   url: "http://localhost:3000/api/postTracer",
+    // });
+    // if (response !== undefined) {
+    //   console.log(response);
+    //   setStatus(response);
+    //   setSend(true);
+    // }
+
+    setSend(true);
+    const response = await fetch("http://localhost:3000/api/postTracer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: value,
+        priority: select,
+        text: textarea,
+      }),
     });
-    if (response !== undefined) {
-      setStatus(response);
-      setOk(response.ok);
+
+    if (!response.ok) {
+      const { message } = await response.json();
+      return setStatus({
+        ok: response.ok,
+        message: message,
+      });
+    } else {
+      const { message } = await response.json();
+      setStatus({
+        ok: true,
+        message: message,
+      });
     }
   };
   useEffect(() => {
-    if (status !== undefined && status.ok) {
+    if (status !== undefined) {
       setTimeout(() => {
-        setOk(false);
+        setSend(false);
       }, 2000);
     }
   }, [status]);
   return (
     <>
-      {status?.ok && (
-        <div
-          className={`bg-white rounded-xl text-black left-[calc(50%-156px)]   w-[312px] h-20 flex items-center justify-center space-x-4 absolute ${
-            ok
-              ? "shadow-5xl transition-all translate-y-full duration-500"
-              : "transition-all -translate-y-[258px] duration-500"
-          }`}
-        >
-          <CiCircleCheck size={40} className="text-green-500" />
-          <p className={`text-2xl ${roboto.className} `}>{status.message}</p>
-        </div>
-      )}
+      <div
+        className={`bg-white rounded-xl text-black left-[calc(50%-156px)]  w-[312px] h-28 flex items-center justify-center space-x-4 absolute transition-all -translate-y-[290px] ${
+          send
+            ? "duration-500 shadow-5xl transition-all translate-y-[calc(100%+5px)]"
+            : null
+        }`}
+      >
+        {status !== undefined && status.ok ? (
+          <>
+            <CiCircleCheck size={40} className="text-green-500" />
+            <p className={`text-xl ${roboto.className} `}>{status?.message}</p>
+          </>
+        ) : (
+          <>
+            <FaRegCircleXmark size={40} className="text-red-500" />
+            <p className={`text-xl ${roboto.className} `}>{status?.message}</p>
+          </>
+        )}
+      </div>
+
       {
         // ! Here goes the label and input of title CLIENT
       }

@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+// import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 const POST = async (request: Request) => {
@@ -12,14 +12,19 @@ const POST = async (request: Request) => {
       body: JSON.stringify(res),
     });
     if (!response.ok) {
-      return NextResponse.json({ message: "Error en el response" });
+      return NextResponse.json({
+        message: "Error en el response",
+        error: true,
+        status: 404,
+      });
     }
-
     const data = await response.json();
-
     return NextResponse.json(data);
-  } finally {
-    return NextResponse.json({ finally: "data recived" });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Backend must be disconnected from the grid" },
+      { status: 500 }
+    );
   }
 };
 

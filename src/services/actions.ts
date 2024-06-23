@@ -10,27 +10,25 @@ type Props = {
 };
 
 const addTracerServerAction = async (props: Props) => {
-  try {
-    const object = {
-      title: props.title,
-      priority: props.priority,
-      text: props.text,
-    };
-    const response = await fetch(`${props.url}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(object),
-    });
-    if (!response.ok) {
-      return { message: "error en el response", status: 404, ok: false };
-    }
-    revalidateTag("home");
-    return { message: "Data Sended", status: 200, ok: true };
-  } catch (error) {
-    console.log(error);
+  const object = {
+    title: props.title,
+    priority: props.priority,
+    text: props.text,
+  };
+  const response = await fetch(`${props.url}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(object),
+  });
+  // const data = await response.json();
+  console.log(response.statusText);
+  if (!response.ok) {
+    return { message: "Send Error", status: 404, ok: false };
   }
+  revalidateTag("home");
+  return { message: "Data Sended", status: 200, ok: true };
 };
 
 export { addTracerServerAction };
