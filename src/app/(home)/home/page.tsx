@@ -3,7 +3,7 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
-import { Sort } from "../../../../../types/type";
+import { Sort } from "@/lib/type";
 
 const Home = async () => {
   const response = await fetch(

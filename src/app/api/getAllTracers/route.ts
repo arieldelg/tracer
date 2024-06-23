@@ -1,5 +1,6 @@
+import { GetTracer } from "@/lib/type";
 import { NextResponse } from "next/server";
-import { GetTracer } from "../../../../../types/type";
+
 //! route that handles all the Api Get Fetch of the tracers based on the owners security key maybe? need to make authentication
 const GET = async () => {
   const response = await fetch(`${process.env.BACKEND_ENDPOINT}/addTracer`, {
