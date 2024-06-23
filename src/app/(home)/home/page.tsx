@@ -7,7 +7,7 @@ import { Sort } from "@/lib/type";
 
 const Home = async () => {
   const response = await fetch(
-    `${process.env.SERVER_ACTIONS_ENDPOINTS}/getAllTracers`,
+    `${process.env.SERVER_ACTIONS_ENDPOINTS}/api/getAllTracers`,
     {
       next: { tags: ["home"] },
       cache: "no-store",
