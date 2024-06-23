@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 const POST = async (request: Request) => {
   const res = await request.json();
   try {
-    const response = await fetch(`${process.env.BACKEND_ENDPOINT}/addTracer`, {
+    const response = await fetch(`${process.env.API_URL}/api/addTracer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
