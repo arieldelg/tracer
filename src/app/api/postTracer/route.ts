@@ -1,6 +1,6 @@
-// import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
+// ! route that fetch to the backend endPoint to post the tracer to the database (MongoDB)
 const POST = async (request: Request) => {
   const res = await request.json();
   try {

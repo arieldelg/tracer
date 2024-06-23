@@ -3,7 +3,6 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Input_Select/Select";
-// import { addTracerServerAction } from "@/services/actions";
 import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { roboto } from "@/app/fonts";
@@ -20,21 +19,12 @@ const AddTracerClientSide = () => {
   const [select, setSelect] = useState<string>("");
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
   const [send, setSend] = useState<boolean>();
+
+  // ! function that handles reset value when sending data and the fetching directly to the route.ts instead of a server action
   const handleSendData = async () => {
     setValue("");
     setTextArea("");
     setSelect("");
-    // const response = await addTracerServerAction({
-    //   title: value,
-    //   priority: select,
-    //   text: textarea,
-    //   url: "http://localhost:3000/api/postTracer",
-    // });
-    // if (response !== undefined) {
-    //   console.log(response);
-    //   setStatus(response);
-    //   setSend(true);
-    // }
 
     setSend(true);
     const response = await fetch("http://localhost:3000/api/postTracer", {
@@ -63,6 +53,8 @@ const AddTracerClientSide = () => {
       });
     }
   };
+
+  //! useEffect that reset the alerto when sending to it initial position
   useEffect(() => {
     if (status !== undefined) {
       setTimeout(() => {
@@ -72,6 +64,9 @@ const AddTracerClientSide = () => {
   }, [status]);
   return (
     <>
+      {
+        // ! here goes the status when posting the data
+      }
       <div
         className={`bg-white rounded-xl text-black left-[calc(50%-156px)]  w-[312px] h-28 flex items-center justify-center space-x-4 absolute transition-all -translate-y-[290px] ${
           send
@@ -153,8 +148,6 @@ const AddTracerClientSide = () => {
           color="green"
           onlyOne={false}
           fetch={() => handleSendData()}
-          // catchError={setError}
-          // setStatus={setStatus}
         />
       </div>
     </>
