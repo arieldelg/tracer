@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 //! route that handles all the Api Get Fetch of the tracers based on the owners security key maybe? need to make authentication
 const GET = async () => {
-  const response = await fetch(`http://localhost:3001/api/addTracer`, {
+  const response = await fetch(`${process.env.API_URL}/api/addTracer`, {
     headers: {
       "Content-Type": "application/json",
     },
