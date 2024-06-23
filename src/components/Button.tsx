@@ -10,7 +10,6 @@ type Props = {
   onlyOne: boolean;
   font?: string;
   fetch?: any;
-  // setStatus?: Dispatch<SetStateAction<boolean>>;
 };
 
 const Button = (props: Props) => {

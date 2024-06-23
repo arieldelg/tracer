@@ -3,13 +3,18 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
+import { Sort } from "../../../../../types/type";
 
 const Home = async () => {
-  const response = await fetch("http://localhost:3001/api/addTracer", {
-    next: { tags: ["home"] },
-  });
-  const data = await response.json();
-  console.log(data, "perro");
+  const response = await fetch(
+    `${process.env.SERVER_ACTIONS_ENDPOINTS}/getAllTracers`,
+    {
+      next: { tags: ["home"] },
+      cache: "no-store",
+    }
+  );
+  const data: Sort = await response.json();
+
   return (
     <>
       {
@@ -28,14 +33,17 @@ const Home = async () => {
           <h2 className="text-xl font-bold">High Tracers</h2>
         </div>
         <div className="py-4">
-          <ul>
+          {data.high.map((element) => {
+            return <p key={element.id}>{element.title}</p>;
+          })}
+          {/* <ul>
             <li>
               Para tener un componente servidor dentro de un componente cliente
               se debe usar el metodo de envoltura directa ejemplo:
               <br />
               div-component-div
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
 

@@ -7,12 +7,6 @@ import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { roboto } from "@/app/fonts";
 
-type Response = {
-  message: string;
-  status: number;
-  ok: boolean;
-};
-
 const AddTracerClientSide = () => {
   const [value, setValue] = useState<string>("");
   const [textarea, setTextArea] = useState<string>("");
@@ -27,17 +21,20 @@ const AddTracerClientSide = () => {
     setSelect("");
 
     setSend(true);
-    const response = await fetch("http://localhost:3000/api/postTracer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: value,
-        priority: select,
-        text: textarea,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.SERVER_ACTIONS_ENDPOINTS}/postTracer`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: value,
+          priority: select,
+          text: textarea,
+        }),
+      }
+    );
 
     if (!response.ok) {
       const { message } = await response.json();
