@@ -9,12 +9,11 @@ import TracerCard from "@/components/TracerCard";
 const Home = async () => {
   const getTracers = async () => {
     "use server";
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/addTracer`,
-      {
-        next: { tags: ["home"] },
-      }
-    );
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    console.log(apiUrl, "perro");
+    const response = await fetch(`${apiUrl}/api/addTracer`, {
+      next: { tags: ["home"] },
+    });
     const data: GetTracer[] = await response.json();
     const sort = data.sort((a, b) => a.priority.localeCompare(b.priority));
 
