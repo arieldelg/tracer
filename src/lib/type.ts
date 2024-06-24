@@ -8,7 +8,7 @@ export type SaveTracer = {
 };
 
 export interface GetTracer extends SaveTracer {
-  id: "string";
+  _id: "string";
 }
 
 export type Sort = {

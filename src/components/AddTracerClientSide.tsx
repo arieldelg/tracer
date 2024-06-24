@@ -6,6 +6,7 @@ import Select from "./Input_Select/Select";
 import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { roboto } from "@/app/fonts";
+import { addTracerServerAction } from "@/services/actions";
 
 const AddTracerClientSide = () => {
   const [value, setValue] = useState<string>("");
@@ -21,29 +22,22 @@ const AddTracerClientSide = () => {
     setSelect("");
 
     setSend(true);
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/postTracer`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: value,
-          priority: select,
-          text: textarea,
-        }),
-      }
-    );
+    const response = await addTracerServerAction({
+      title: value,
+      priority: select,
+      text: textarea,
+    });
 
     if (!response.ok) {
-      const { message } = await response.json();
+      const { message, error } = response;
+      const errorObject = JSON.parse(error);
+      console.log(errorObject);
       return setStatus({
         ok: response.ok,
         message: message,
       });
     } else {
-      const { message } = await response.json();
+      const { message } = response;
       setStatus({
         ok: true,
         message: message,

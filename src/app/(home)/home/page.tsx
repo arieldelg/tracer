@@ -3,18 +3,39 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
-import { Sort } from "@/lib/type";
+import { GetTracer, Sort } from "@/lib/type";
+import TracerCard from "@/components/TracerCard";
 
 const Home = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/getAllTracers`,
-    {
+  const getTracers = async () => {
+    "use server";
+    const response = await fetch(`${process.env.API_URL}/api/addTracer`, {
       next: { tags: ["home"] },
-      cache: "no-store",
-    }
-  );
-  const data: Sort = await response.json();
+    });
+    const data: GetTracer[] = await response.json();
+    const sort = data.sort((a, b) => a.priority.localeCompare(b.priority));
 
+    const high: GetTracer[] = [];
+    const medium: GetTracer[] = [];
+    const low: GetTracer[] = [];
+    sort.forEach((element) => {
+      if (element.priority === "High") {
+        high.push(element);
+      } else if (element.priority === "Medium") {
+        medium.push(element);
+      } else if (element.priority === "Low") {
+        low.push(element);
+      }
+    });
+    const object = {
+      high: high,
+      medium: medium,
+      low: low,
+    };
+    return object;
+  };
+  const data = await getTracers();
+  console.log(data);
   return (
     <>
       {
@@ -28,22 +49,14 @@ const Home = async () => {
 
       <div>
         <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
-          <p className="text-[30px] pr-2">1</p>
+          <p className="text-[30px] pr-2">{data.high.length}</p>
           <BsExclamationDiamond size={30} style={{ margin: 0, color: "red" }} />
-          <h2 className="text-xl font-bold">High Tracers</h2>
+          <h2 className="text-3xl font-bold">High Tracers</h2>
         </div>
-        <div className="py-4">
+        <div className="py-8 space-y-6">
           {data.high.map((element) => {
-            return <p key={element.id}>{element.title}</p>;
+            return <TracerCard key={element._id} data={element} />;
           })}
-          {/* <ul>
-            <li>
-              Para tener un componente servidor dentro de un componente cliente
-              se debe usar el metodo de envoltura directa ejemplo:
-              <br />
-              div-component-div
-            </li>
-          </ul> */}
         </div>
       </div>
 

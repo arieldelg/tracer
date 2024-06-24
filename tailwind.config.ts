@@ -18,6 +18,7 @@ const config: Config = {
         "3xl": "-5px 5px 30px 5px rgba(0,0,0,.6)",
         "4xl": "50px 0px 30px 20px rgba(0,0,0,.6)",
         "5xl": "0px 0px 30px 30px rgba(0,0,0,.6)",
+        "6xl": "-10px 0px 10px 8px rgba(0,0,0,.4)",
       },
     },
   },
