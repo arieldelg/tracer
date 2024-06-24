@@ -17,13 +17,16 @@ type Props = {
 const addTracerServerAction = async (props: Props) => {
   try {
     const res = await schema.validate(props);
-    const response = await fetch(`${process.env.API_URL}/api/addTracer`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(res),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/addTracer`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(res),
+      }
+    );
     if (!response.ok) {
       return {
         message: "Error en el response",
