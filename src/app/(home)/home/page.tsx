@@ -9,7 +9,7 @@ import TracerCard from "@/components/TracerCard";
 const Home = async () => {
   const getTracers = async () => {
     "use server";
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.API_URL;
     console.log(apiUrl, "perro");
     const response = await fetch(`${apiUrl}/api/addTracer`, {
       next: { tags: ["home"] },
