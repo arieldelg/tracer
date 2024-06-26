@@ -20,6 +20,9 @@ const config: Config = {
         "5xl": "0px 0px 30px 30px rgba(0,0,0,.6)",
         "6xl": "-10px 0px 10px 8px rgba(0,0,0,.4)",
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite origin-center",
+      },
     },
   },
   plugins: [],

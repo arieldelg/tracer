@@ -24,6 +24,7 @@ const Search = () => {
             value={value}
             enterSearch={enterSearch}
             type="text"
+            // border={undefined}
           />
           <MagnifyingGlassIcon className="w-10" />
         </div>

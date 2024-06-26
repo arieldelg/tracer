@@ -5,13 +5,14 @@ import React from "react";
 type Props = {
   name: string;
   color?: string;
-  colorTailwind?: string;
+  bgColorTailwind?: string;
   url?: string;
   children?: React.ReactNode;
   onlyOne: boolean;
   font?: string;
   fetch?: any;
   onClick?: () => void;
+  loading?: boolean;
 };
 
 const Button = (props: Props) => {
@@ -45,26 +46,13 @@ const Button = (props: Props) => {
         {props.children} {props.name}
       </button>
     );
-  } else if (props.fetch) {
-    return (
-      <button
-        className={`${
-          props.onlyOne ? "w-full" : "w-1/2"
-        } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
-          props.children ? "flex items-center justify-center gap-4 px-4" : null
-        } ${props.font && props.font}`}
-        onClick={() => props.fetch()}
-      >
-        {props.children} {props.name}
-      </button>
-    );
   } else {
     props.onClick;
     return (
       <button
         style={{ backgroundColor: props.color }}
         className={`${props.onlyOne ? "w-full" : "w-1/2"} ${
-          props.colorTailwind
+          props.bgColorTailwind
         } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
           props.children ? "flex items-center justify-center gap-4 px-4" : null
         } ${props.font && props.font}`}
@@ -74,7 +62,14 @@ const Button = (props: Props) => {
           }
         }}
       >
-        {props.children} {props.name}
+        {props.loading ? (
+          props.children
+        ) : (
+          <>
+            {props.children}
+            {props.name}
+          </>
+        )}
       </button>
     );
   }

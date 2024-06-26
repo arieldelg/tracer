@@ -10,8 +10,15 @@ type Props = {
   id: string;
 };
 
+// type ResponseUpdated = {
+//   acknowledged: boolean;
+//   matchedCount: number;
+//   modifiedCount: number;
+//   upsertedCount: number;
+//   upsertedId: null;
+// };
+
 const updateTracerById = async (props: Props) => {
-  console.log(props, "perro");
   const object = {
     title: props.title,
     text: props.text,

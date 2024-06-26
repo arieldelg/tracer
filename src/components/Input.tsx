@@ -46,6 +46,7 @@ type PropsInput = {
 };
 
 const Input = (props: PropsInput) => {
+  console.log(props.border);
   return (
     <input
       style={{
@@ -60,15 +61,15 @@ const Input = (props: PropsInput) => {
       placeholder={
         props.placeholder === undefined ? "Type anything" : props.placeholder
       }
-      className={`w-full h-16 text-${
-        props.border !== undefined ? props.border : "border-none"
-      } ${props.rounded !== null ? props.rounded : "rounded-none"} ${
+      className={`w-full h-16 ${props.border ? props.border : "border-none"} ${
+        props.rounded !== null ? props.rounded : "rounded-none"
+      } ${
         props.bgColorTailwind ? props.bgColorTailwind : "bg-[#222222]"
       } outline-none p-2 ${
         props.fontTailwind ? props.fontTailwind : "text-xl"
       } ${props.colorTailwind ? props.colorTailwind : null} ${
         props.colorTailwind ? "placeholder:text-black/50" : null
-      } ${props.shadowBoxTailwind ? props.shadowBoxTailwind : null} border`}
+      } ${props.shadowBoxTailwind ? props.shadowBoxTailwind : null}`}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         props.setValue(e.target.value)
       }

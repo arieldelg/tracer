@@ -6,15 +6,17 @@ import { FaCheck } from "react-icons/fa";
 import { GetTracer } from "@/lib/type";
 import { ChangeEvent, useEffect, useState } from "react";
 import { roboto } from "@/app/fonts";
+import { updateTracerById } from "@/services/updateTracerById";
 
 type Props = {
   data: GetTracer[];
 };
 
 const IndividualTracerClientSide = ({ data }: Props) => {
+  console.log(data);
   const tracerProps = data[0];
   const [tracer, setTracer] = useState<GetTracer>(data[0]);
-  const [title, setTitle] = useState<string>(tracerProps.title);
+  const [title, setTitle] = useState<string>(data[0].title);
   const [select, setSelect] = useState<string>(tracerProps.priority);
   const [object, setObject] = useState<{
     color: string;
@@ -23,25 +25,48 @@ const IndividualTracerClientSide = ({ data }: Props) => {
   }>();
   const [disable, setDisable] = useState<boolean>(true);
   const [done, setDone] = useState<boolean>(tracerProps.complete);
-  const [textarea, setTextArea] = useState<string>(tracerProps.text);
+  const [textarea, setTextArea] = useState<string>(data[0].text);
+  const [loading, setLoading] = useState<boolean>(false);
   const [button, setButton] = useState<{ bgColor: string; name: string }>({
     bgColor: "bg-blue-500",
     name: "Edit",
   });
 
-  const handleFunction = (): void => {
+  const handleFunction = async () => {
     if (disable === true) {
       console.log("perro");
       setDisable(false);
     }
     if (button.name === "Save") {
-      console.log("aqui lo mando a guardar");
+      setLoading(true);
+      const response1 = await updateTracerById({
+        title: title,
+        text: textarea,
+        complete: done,
+        priority: select,
+        id: tracerProps._id,
+      });
+
+      if (response1.modifiedCount === 1) {
+        setLoading(false);
+        setObject({
+          color: "",
+          bgColor: "",
+          shadow: "",
+        });
+        setButton({
+          name: "Edit",
+          bgColor: "bg-blue-500",
+        });
+        setDisable(true);
+      }
     }
   };
+
   useEffect(() => {
     if (!disable) {
-      setTitle(tracer.title);
-      setTextArea(tracer.text);
+      setTitle(data[0].title);
+      setTextArea(data[0].text);
       setButton({
         name: "Save",
         bgColor: "bg-green-500",
@@ -52,7 +77,9 @@ const IndividualTracerClientSide = ({ data }: Props) => {
         shadow: "shadow-3xl",
       });
     }
-  }, [disable, tracer]);
+    console.log("me tengo que ejecutar una vez");
+    // return () => {};
+  }, [disable, data]);
   return (
     <>
       {
@@ -66,13 +93,13 @@ const IndividualTracerClientSide = ({ data }: Props) => {
           className={`flex flex-col items-center text-sm ${roboto.className}`}
         >
           <p>Date Created at:</p>
-          <p>{tracer.dateCreated}</p>
+          <p>{data[0].dateCreated}</p>
         </div>
         <div
           className={`flex flex-col items-center text-sm ${roboto.className}`}
         >
           <p>Date Updated at:</p>
-          <p>{tracer.dateUpdated}</p>
+          <p>{data[0].dateUpdated}</p>
         </div>
       </div>
       {
@@ -81,10 +108,30 @@ const IndividualTracerClientSide = ({ data }: Props) => {
       <Button
         onlyOne={true}
         name={button.name}
-        colorTailwind={button.bgColor}
+        bgColorTailwind={button.bgColor}
         font={roboto.className}
         onClick={() => handleFunction()}
-      />
+        loading={loading}
+      >
+        {loading && (
+          <svg
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-40 h-16 animate-spin"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              fill="none"
+              r="35"
+              strokeWidth="15"
+              stroke="#FFFFFF"
+              strokeDasharray="110 1400"
+              strokeLinecap="round"
+            />
+          </svg>
+        )}
+      </Button>
       {
         // ! here goes the title
       }

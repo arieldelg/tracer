@@ -15,6 +15,7 @@ export const tracerByIdServerAction = async (
   "use server";
   const response = await fetch("http://localhost:8000/api/tracerById/" + id, {
     cache: "no-cache",
+    next: { tags: ["home"] },
   });
   const data = await response.json();
   return data;

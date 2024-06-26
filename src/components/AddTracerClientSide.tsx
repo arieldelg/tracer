@@ -63,7 +63,7 @@ const AddTracerClientSide = () => {
         // ! here goes the status when posting the data
       }
       <div
-        className={`bg-white rounded-xl text-black left-[calc(50%-156px)]  w-[312px] h-28 flex items-center justify-center space-x-4 absolute transition-all -translate-y-[290px] ${
+        className={`bg-white rounded-xl text-black left-[calc(50%-156px)]  w-[312px] h-28 flex items-center justify-center space-x-4 absolute transition-all -translate-y-[290px] z-50 ${
           send
             ? "duration-500 shadow-5xl transition-all translate-y-[calc(100%+5px)]"
             : null
@@ -160,9 +160,9 @@ const AddTracerClientSide = () => {
         <Button name="Cancel" color="red" url="back" onlyOne={false} />
         <Button
           name="Save"
-          color="green"
+          bgColorTailwind="bg-green-500"
           onlyOne={false}
-          fetch={() => handleSendData()}
+          onClick={() => handleSendData()}
         />
       </div>
     </>
