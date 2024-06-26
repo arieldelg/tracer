@@ -7,19 +7,23 @@ import { GetTracer } from "@/lib/type";
 import TracerCard from "@/components/TracerCard";
 
 const Home = async () => {
+  // ! server action of getting tracer
   const getTracers = async () => {
     "use server";
+    // ! call the url env
     const apiUrl = process.env.API_URL;
-    console.log(apiUrl, "perro");
+    // !making the fetch
     const response = await fetch(`${apiUrl}/api/addTracer`, {
       next: { tags: ["home"] },
     });
+    //! manipulating the data
     const data: GetTracer[] = await response.json();
     const sort = data.sort((a, b) => a.priority.localeCompare(b.priority));
 
     const high: GetTracer[] = [];
     const medium: GetTracer[] = [];
     const low: GetTracer[] = [];
+
     sort.forEach((element) => {
       if (element.priority === "High") {
         high.push(element);
@@ -36,6 +40,8 @@ const Home = async () => {
     };
     return object;
   };
+
+  // ! calling the server action
   const data = await getTracers();
   console.log(data);
   return (
@@ -57,6 +63,7 @@ const Home = async () => {
         </div>
         <div className="py-8 space-y-6">
           {data.high.map((element) => {
+            // ! component TracerCard
             return <TracerCard key={element._id} data={element} />;
           })}
         </div>

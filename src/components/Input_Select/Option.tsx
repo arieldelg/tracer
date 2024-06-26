@@ -7,7 +7,7 @@ type PropsOption = {
 const Option = ({ last, name, handleSelectOption }: PropsOption) => {
   return (
     <div
-      className={`text-2xl ${
+      className={`text-xl ${
         last ? null : "border-b"
       } font-bold w-full h-16 flex items-center p-4`}
       onClick={() => handleSelectOption(name)}

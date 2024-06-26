@@ -4,12 +4,14 @@ import React from "react";
 
 type Props = {
   name: string;
-  color: string;
+  color?: string;
+  colorTailwind?: string;
   url?: string;
   children?: React.ReactNode;
   onlyOne: boolean;
   font?: string;
   fetch?: any;
+  onClick: () => void;
 };
 
 const Button = (props: Props) => {
@@ -59,11 +61,13 @@ const Button = (props: Props) => {
   } else {
     return (
       <button
-        className={`${
-          props.onlyOne ? "w-full" : "w-1/2"
+        style={{ backgroundColor: props.color }}
+        className={`${props.onlyOne ? "w-full" : "w-1/2"} ${
+          props.colorTailwind
         } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
           props.children ? "flex items-center justify-center gap-4 px-4" : null
         } ${props.font && props.font}`}
+        onClick={() => props.onClick()}
       >
         {props.children} {props.name}
       </button>

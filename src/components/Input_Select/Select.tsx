@@ -8,6 +8,8 @@ type PropSelect = {
   optionsSelect: string[];
   setSelect: Dispatch<SetStateAction<string>>;
   select: string;
+  height: number;
+  width: string | number;
 };
 
 const Select = (props: PropSelect) => {
@@ -28,9 +30,12 @@ const Select = (props: PropSelect) => {
     }
   }, [props.select]);
   return (
-    <section className=" border rounded-xl h-16 shadow-3xl space-y-2 w-full">
+    <section
+      className=" border rounded-xl shadow-3xl space-y-2 w-full"
+      style={{ height: props.height, width: props.width }}
+    >
       <button
-        className="flex items-center justify-between p-4 relative w-full h-full text-2xl font-bold"
+        className="flex items-center text-start justify-between px-4 relative w-full h-full text-base font-bold"
         onClick={() => setOpen((prev) => !prev)}
         type="button"
       >
@@ -40,7 +45,7 @@ const Select = (props: PropSelect) => {
 
       {open && (
         <div
-          className={`border rounded-lg w-[calc(100%-48px)] shadow-3xl absolute bg-[#222222]`}
+          className={`border rounded-lg w-[calc(50%-35px)] shadow-3xl absolute bg-[#222222]`}
         >
           {props.optionsSelect.map((element, index) => {
             if (index === props.optionsSelect.length - 1) {

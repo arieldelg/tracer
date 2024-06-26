@@ -6,12 +6,14 @@ const schema = yup.object({
   title: yup.string().required().min(1),
   priority: yup.string().required().min(1),
   text: yup.string().required().min(1),
+  complete: yup.boolean().required(),
 });
 
 type Props = {
   title: string;
-  priority?: string;
+  priority: string;
   text: string;
+  complete: boolean;
 };
 
 const addTracerServerAction = async (props: Props) => {

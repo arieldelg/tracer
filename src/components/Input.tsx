@@ -1,3 +1,4 @@
+"use client";
 // ! Client Component
 import {
   ChangeEvent,
@@ -25,22 +26,44 @@ type PropsInput = {
     | "rounded-xl"
     | "rounded-2xl"
     | null;
+  disable?: boolean;
+  bgColor?: string;
+  bgColorTailwind?: string;
+  font?: string;
+  fontTailwind?:
+    | "text-xs"
+    | "text-sm"
+    | "text-base"
+    | "text-lg"
+    | "text-xl"
+    | "text-2xl"
+    | "text-3xl"
+    | "text-4xl";
+  color?: string;
+  colorTailwind?: string;
 };
 
 const Input = (props: PropsInput) => {
   return (
     <input
+      style={{
+        backgroundColor: props.bgColor,
+        fontSize: props.font,
+        color: props.color,
+      }}
       type={props.type}
       name={props.name === undefined ? "search" : props.name}
       id={props.id === undefined ? "search" : props.id}
       placeholder={
         props.placeholder === undefined ? "Type anything" : props.placeholder
       }
-      className={`w-full h-16 ${
+      className={`w-full h-16 text-${
         props.border !== undefined ? props.border : "border-none"
-      } ${
-        props.rounded !== null ? props.rounded : "rounded-none"
-      } outline-none bg-transparent p-2  text-xl border`}
+      } ${props.rounded !== null ? props.rounded : "rounded-none"} ${
+        props.bgColorTailwind ? props.bgColorTailwind : "bg-[#222222]"
+      } outline-none p-2 ${
+        props.fontTailwind ? props.fontTailwind : "text-xl"
+      } ${props.colorTailwind ? props.colorTailwind : null} border`}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         props.setValue(e.target.value)
       }
@@ -50,6 +73,7 @@ const Input = (props: PropsInput) => {
         }
       }}
       value={props.value}
+      disabled={props.disable}
     />
   );
 };

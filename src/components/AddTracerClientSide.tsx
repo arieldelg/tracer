@@ -5,6 +5,7 @@ import Input from "./Input";
 import Select from "./Input_Select/Select";
 import { CiCircleCheck } from "react-icons/ci";
 import { FaRegCircleXmark } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
 import { roboto } from "@/app/fonts";
 import { addTracerServerAction } from "@/services/actions";
 
@@ -14,18 +15,20 @@ const AddTracerClientSide = () => {
   const [select, setSelect] = useState<string>("");
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
   const [send, setSend] = useState<boolean>();
+  const [done, setDone] = useState<boolean>(false);
 
   // ! function that handles reset value when sending data and the fetching directly to the route.ts instead of a server action
   const handleSendData = async () => {
     setValue("");
     setTextArea("");
     setSelect("");
-
     setSend(true);
+    setDone(false);
     const response = await addTracerServerAction({
       title: value,
       priority: select,
       text: textarea,
+      complete: done,
     });
 
     if (!response.ok) {
@@ -53,6 +56,7 @@ const AddTracerClientSide = () => {
       }, 2000);
     }
   }, [status]);
+
   return (
     <>
       {
@@ -101,15 +105,32 @@ const AddTracerClientSide = () => {
       {
         // ! Here goes the label and input of Select-Option CLIENT
       }
-      <div className="flex flex-col space-y-4 z-40 w-full">
-        <label htmlFor="priority" className="text-3xl font-bold">
-          Priority
-        </label>
-        <Select
-          optionsSelect={["High", "Medium", "Low"]}
-          setSelect={setSelect}
-          select={select}
-        />
+      <div className="flex flex-row z-40 w-full space-x-4">
+        <div className="flex flex-col w-1/2 justify-between items-start gap-y-4">
+          <label htmlFor="priority" className="text-2xl font-bold">
+            Priority
+          </label>
+          <Select
+            optionsSelect={["High", "Medium", "Low"]}
+            setSelect={setSelect}
+            select={select}
+            height={54}
+            width={"100%"}
+          />
+        </div>
+        <div className="flex flex-col w-1/2 items-center justify-between ">
+          <label htmlFor="complete" className="text-2xl font-bold ">
+            Mark as Done
+          </label>
+          <span
+            className={`w-[52px] h-[52px] bg-[#222222] rounded-xl border-2 border-white/50 ${
+              done ? "bg-green-500" : null
+            }`}
+            onClick={() => setDone((prev) => !prev)}
+          >
+            {done ? <FaCheck className="w-full h-full p-2" /> : null}
+          </span>
+        </div>
       </div>
       {
         // ! Here goes the label and text of the tracer CLIENT
