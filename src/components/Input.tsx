@@ -41,6 +41,8 @@ type PropsInput = {
     | "text-4xl";
   color?: string;
   colorTailwind?: string;
+  shadowBoxTailwind?: string;
+  boxShadow?: string;
 };
 
 const Input = (props: PropsInput) => {
@@ -50,6 +52,7 @@ const Input = (props: PropsInput) => {
         backgroundColor: props.bgColor,
         fontSize: props.font,
         color: props.color,
+        boxShadow: props.boxShadow,
       }}
       type={props.type}
       name={props.name === undefined ? "search" : props.name}
@@ -63,7 +66,9 @@ const Input = (props: PropsInput) => {
         props.bgColorTailwind ? props.bgColorTailwind : "bg-[#222222]"
       } outline-none p-2 ${
         props.fontTailwind ? props.fontTailwind : "text-xl"
-      } ${props.colorTailwind ? props.colorTailwind : null} border`}
+      } ${props.colorTailwind ? props.colorTailwind : null} ${
+        props.colorTailwind ? "placeholder:text-black/50" : null
+      } ${props.shadowBoxTailwind ? props.shadowBoxTailwind : null} border`}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
         props.setValue(e.target.value)
       }

@@ -11,7 +11,7 @@ type Props = {
   onlyOne: boolean;
   font?: string;
   fetch?: any;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Button = (props: Props) => {
@@ -59,6 +59,7 @@ const Button = (props: Props) => {
       </button>
     );
   } else {
+    props.onClick;
     return (
       <button
         style={{ backgroundColor: props.color }}
@@ -67,7 +68,11 @@ const Button = (props: Props) => {
         } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${
           props.children ? "flex items-center justify-center gap-4 px-4" : null
         } ${props.font && props.font}`}
-        onClick={() => props.onClick()}
+        onClick={() => {
+          if (props.onClick) {
+            return props.onClick();
+          }
+        }}
       >
         {props.children} {props.name}
       </button>

@@ -10,6 +10,13 @@ type PropSelect = {
   select: string;
   height: number;
   width: string | number;
+  disable?: boolean;
+  colorTailwind?: string;
+  bgTailwind?: string;
+  color?: string;
+  backgroundColor?: string;
+  shadowTailwind?: string;
+  boxShadow?: string;
 };
 
 const Select = (props: PropSelect) => {
@@ -31,13 +38,23 @@ const Select = (props: PropSelect) => {
   }, [props.select]);
   return (
     <section
-      className=" border rounded-xl shadow-3xl space-y-2 w-full"
+      className=" space-y-2 w-full"
       style={{ height: props.height, width: props.width }}
     >
       <button
-        className="flex items-center text-start justify-between px-4 relative w-full h-full text-base font-bold"
+        style={{
+          backgroundColor: props.backgroundColor,
+          color: props.color,
+          boxShadow: props.boxShadow,
+        }}
+        className={`flex items-center text-start justify-between px-4 relative w-full h-full text-base font-bold rounded-xl border ${
+          props.shadowTailwind ? props.shadowTailwind : null
+        } ${props.bgTailwind ? props.bgTailwind : "bg-[#222222]"} ${
+          props.colorTailwind ? props.colorTailwind : null
+        }`}
         onClick={() => setOpen((prev) => !prev)}
         type="button"
+        disabled={props.disable}
       >
         {placeholder}
         <ChevronDownIcon className="w-8" />
@@ -45,7 +62,9 @@ const Select = (props: PropSelect) => {
 
       {open && (
         <div
-          className={`border rounded-lg w-[calc(50%-35px)] shadow-3xl absolute bg-[#222222]`}
+          className={`border rounded-lg w-[calc(50%-35px)] shadow-3xl absolute ${
+            props.bgTailwind ? "bg-white" : "bg-[#222222]"
+          } ${props.colorTailwind ? props.colorTailwind : null}`}
         >
           {props.optionsSelect.map((element, index) => {
             if (index === props.optionsSelect.length - 1) {

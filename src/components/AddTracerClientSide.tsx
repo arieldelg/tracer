@@ -89,7 +89,7 @@ const AddTracerClientSide = () => {
         <label htmlFor="title" className="text-3xl font-bold">
           Title
         </label>
-        <div className="shadow-3xl">
+        <div>
           <Input
             setValue={setValue}
             value={value}
@@ -103,7 +103,7 @@ const AddTracerClientSide = () => {
         </div>
       </div>
       {
-        // ! Here goes the label and input of Select-Option CLIENT
+        // ! Here goes the container label and input of Select-Option CLIENT and the mark as done Optional
       }
       <div className="flex flex-row z-40 w-full space-x-4">
         <div className="flex flex-col w-1/2 justify-between items-start gap-y-4">
@@ -118,6 +118,9 @@ const AddTracerClientSide = () => {
             width={"100%"}
           />
         </div>
+        {
+          // ! here goes the mark as done optional
+        }
         <div className="flex flex-col w-1/2 items-center justify-between ">
           <label htmlFor="complete" className="text-2xl font-bold ">
             Mark as Done
