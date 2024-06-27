@@ -17,3 +17,16 @@ export type Sort = {
   medium: GetTracer[];
   low: GetTracer[];
 };
+
+export interface Tracer {
+  _id: string;
+  tracer: TracerElement[];
+}
+
+export interface TracerElement {
+  _id: string;
+  text: string;
+  priority: string;
+  title: string;
+  complete: boolean;
+}

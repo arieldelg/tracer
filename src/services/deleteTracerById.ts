@@ -7,6 +7,7 @@ type Props = {
 };
 
 const deleteTracerById = async (props: Props) => {
+  revalidateTag("home");
   try {
     const response = await fetch(
       `${process.env.API_URL}/api/tracerById/` + props.id,
@@ -18,7 +19,6 @@ const deleteTracerById = async (props: Props) => {
       return response;
     }
     const data = await response.json();
-    revalidateTag("home");
     return data;
   } catch (error) {
     throw error;

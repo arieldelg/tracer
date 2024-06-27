@@ -15,7 +15,6 @@ type Props = {
 const IndividualTracerClientSide = ({ data }: Props) => {
   console.log(data);
   const tracerProps = data[0];
-  const [tracer, setTracer] = useState<GetTracer>(data[0]);
   const [title, setTitle] = useState<string>(data[0].title);
   const [select, setSelect] = useState<string>(tracerProps.priority);
   const [object, setObject] = useState<{

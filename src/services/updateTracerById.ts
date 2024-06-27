@@ -1,5 +1,7 @@
 "use server";
 
+// import { revalidateTag } from "next/cache";
+
 import { revalidateTag } from "next/cache";
 
 type Props = {
@@ -10,14 +12,6 @@ type Props = {
   id: string;
 };
 
-// type ResponseUpdated = {
-//   acknowledged: boolean;
-//   matchedCount: number;
-//   modifiedCount: number;
-//   upsertedCount: number;
-//   upsertedId: null;
-// };
-
 const updateTracerById = async (props: Props) => {
   const object = {
     title: props.title,
@@ -25,6 +19,7 @@ const updateTracerById = async (props: Props) => {
     complete: props.complete,
     priority: props.priority,
   };
+  // console.log(object, props);
   try {
     const response = await fetch(
       `${process.env.API_URL}/api/tracerById/` + props.id,
@@ -36,15 +31,20 @@ const updateTracerById = async (props: Props) => {
         body: JSON.stringify(object),
       }
     );
+    // console.log(response.status, "cliente");
+    // console.log(response)
     if (!response.ok) {
       return "error en el response";
     }
+
+    // revalidatePath("/home");
     const data = await response.json();
     console.log(data);
-    revalidateTag("home");
     return data;
   } catch (error) {
     throw error;
+  } finally {
+    revalidateTag("home");
   }
 };
 

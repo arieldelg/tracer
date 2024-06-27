@@ -3,47 +3,48 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationDiamond, BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
-import { GetTracer } from "@/lib/type";
+import { Tracer } from "@/lib/type";
 import TracerCard from "@/components/TracerCard";
 
 const Home = async () => {
   // ! server action of getting tracer
-  const getTracers = async () => {
-    "use server";
-    // ! call the url env
-    const apiUrl = process.env.API_URL;
-    // !making the fetch
-    const response = await fetch(`${apiUrl}/api/addTracer`, {
-      next: { tags: ["home"] },
-    });
-    //! manipulating the data
-    const data: GetTracer[] = await response.json();
-    const sort = data.sort((a, b) => a.priority.localeCompare(b.priority));
 
-    const high: GetTracer[] = [];
-    const medium: GetTracer[] = [];
-    const low: GetTracer[] = [];
+  // ! call the url env
+  const apiUrl = process.env.API_URL;
+  // !making the fetch
+  const response = await fetch(`${apiUrl}/api/addTracer`, {
+    next: { tags: ["home"] },
+  });
+  //! manipulating the data
+  const data: Tracer[] = await response.json();
+  // const sort = data.sort((a, b) => a.priority.localeCompare(b.priority));
+  const high = data.filter((element) => element._id === "High")[0].tracer;
+  console.log(response.status);
 
-    sort.forEach((element) => {
-      if (element.priority === "High") {
-        high.push(element);
-      } else if (element.priority === "Medium") {
-        medium.push(element);
-      } else if (element.priority === "Low") {
-        low.push(element);
-      }
-    });
-    const object = {
-      high: high,
-      medium: medium,
-      low: low,
-    };
-    return object;
-  };
+  // const high: GetTracer[] = [];
+  // const medium: GetTracer[] = [];
+  // const low: GetTracer[] = [];
+
+  // sort.forEach((element) => {
+  //   if (element.priority === "High") {
+  //     high.push(element);
+  //   } else if (element.priority === "Medium") {
+  //     medium.push(element);
+  //   } else if (element.priority === "Low") {
+  //     low.push(element);
+  //   }
+  // });
+  // const object = {
+  //   high: high,
+  //   medium: medium,
+  //   low: low,
+  // };
+  // console.log(object);
+  // return object;
 
   // ! calling the server action
-  const data = await getTracers();
-  console.log(data);
+  // const data = await getTracers();
+
   return (
     <>
       {
@@ -57,15 +58,12 @@ const Home = async () => {
 
       <div>
         <div className="flex items-center space-x-4 pb-4 border-b-2 border-white/10">
-          <p className="text-[30px] pr-2">{data.high.length}</p>
+          <p className="text-[30px] pr-2">{high.length}</p>
           <BsExclamationDiamond size={30} style={{ margin: 0, color: "red" }} />
           <h2 className="text-3xl font-bold">High Tracers</h2>
         </div>
         <div className="py-8 space-y-6">
-          {data.high.map((element) => {
-            // ! component TracerCard
-            return <TracerCard key={element._id} data={element} />;
-          })}
+          <TracerCard data={high} />
         </div>
       </div>
 

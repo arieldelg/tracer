@@ -1,60 +1,112 @@
 "use client";
-import { GetTracer } from "@/lib/type";
+import { TracerElement } from "@/lib/type";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiSquareCheck } from "react-icons/ci";
-import React from "react";
+import React, { startTransition, useOptimistic } from "react";
 import { roboto } from "@/app/fonts";
 import Link from "next/link";
 import { updateTracerById } from "@/services/updateTracerById";
 import { deleteTracerById } from "@/services/deleteTracerById";
 
 type Props = {
-  data: GetTracer;
+  data: TracerElement[];
 };
 
 const TracerCard = ({ data }: Props) => {
-  // const [colorSVG, setColoSVG] = useState<string>("");
-  const url = data.title.split(" ").join("-");
-  // ! event handler to update tracer
-  const handleCheck = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+  //! using optimistic
+  const [tracerOptimistic, setTracerOptimistic] = useOptimistic(
+    data,
+    (state, { action, task }: { action: string; task: TracerElement }) => {
+      switch (action) {
+        case "delete":
+          return state.filter(({ _id }) => _id !== task._id);
+        case "update":
+          return state.map((t) => {
+            if (t._id === task._id) {
+              return {
+                _id: task._id,
+                complete: !task.complete,
+                priority: task.priority,
+                text: task.text,
+                title: task.title,
+              };
+            } else {
+              return t;
+            }
+          });
+        default:
+          return [...state, task];
+      }
+    }
+  );
+
+  // ! event handler to update tracer and calls a server action
+  const handleCheck = (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    data: TracerElement
+  ) => {
     e.preventDefault();
-    const response = await updateTracerById({
+    startTransition(() =>
+      setTracerOptimistic({
+        action: "update",
+        task: data,
+      })
+    );
+    updateTracerById({
       title: data.title,
       text: data.text,
       complete: !data.complete,
       priority: data.priority,
       id: data._id,
     });
-    console.log(response);
   };
+  // ! event handler to delete tracer and calls a server action
 
-  // ! event handler to delete tracer
-  const handleDelete = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleDelete = (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    data: TracerElement
+  ) => {
     e.preventDefault();
-    const id = data._id;
-    const response = await deleteTracerById({
-      id: id,
+    startTransition(() =>
+      setTracerOptimistic({
+        action: "delete",
+        task: data,
+      })
+    );
+    deleteTracerById({
+      id: data._id,
     });
-    console.log(response);
   };
 
   return (
-    <Link
-      href={`tracer/${url}-${data._id}`}
-      className="w-full h-16 border rounded-xl shadow-6xl bg-[#222222] flex items-center justify-between px-2"
-    >
-      <div className="flex space-x-2 items-center">
-        <CiSquareCheck
-          size={42}
-          className={`${data.complete ? "text-green-500" : null}`}
-          onClick={(e) => handleCheck(e)}
-        />
-        <p className={`text-2xl capitalize ${roboto.className}`}>
-          {data.title}
-        </p>
-      </div>
-      <FaRegCircleXmark size={40} onClick={(e) => handleDelete(e)} />
-    </Link>
+    <>
+      {tracerOptimistic.map((element) => {
+        const url = element.title.split(" ").join("-");
+
+        return (
+          <Link
+            key={element._id}
+            href={`tracer/${url}-${element._id}`}
+            className="w-full h-16 border rounded-xl shadow-6xl bg-[#222222] flex items-center justify-between px-2"
+          >
+            <div className="flex space-x-2 items-center">
+              <CiSquareCheck
+                size={42}
+                className={`${element.complete ? "text-green-500" : null}`}
+                onClick={(e) => handleCheck(e, element)}
+              />
+              <p className={`text-2xl capitalize ${roboto.className}`}>
+                {element.title}
+              </p>
+            </div>
+            <FaRegCircleXmark
+              size={40}
+              onClick={(e) => handleDelete(e, element)}
+            />
+          </Link>
+        );
+      })}
+    </>
   );
 };
 
