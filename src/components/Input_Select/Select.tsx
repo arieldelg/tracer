@@ -6,8 +6,20 @@ import React from "react";
 
 type PropSelect = {
   optionsSelect: string[];
-  setSelect: Dispatch<SetStateAction<string>>;
-  select: string;
+  select: {
+    title: string;
+    priority: string;
+    complete: boolean;
+    text: string;
+  };
+  setSelect: Dispatch<
+    SetStateAction<{
+      title: string;
+      priority: string;
+      complete: boolean;
+      text: string;
+    }>
+  >;
   height: number;
   width: string | number;
   disable?: boolean;
@@ -26,16 +38,20 @@ const Select = (props: PropSelect) => {
 
   // ! function that handles the value selected to a form and close the options
   const handleSelectOption = (selection: string) => {
-    props.setSelect(selection);
+    props.setSelect({
+      ...props.select,
+      priority: selection,
+    });
     setOpen(false);
   };
   useEffect(() => {
-    if (props.select.length === 0) {
+    if (props.select.priority.length === 0) {
       setPlaceHolder("Select an option");
     } else {
-      setPlaceHolder(props.select);
+      setPlaceHolder(props.select.priority);
     }
   }, [props.select]);
+
   return (
     <section
       className=" space-y-2 w-full"
@@ -47,11 +63,7 @@ const Select = (props: PropSelect) => {
           color: props.color,
           boxShadow: props.boxShadow,
         }}
-        className={`flex items-center text-start justify-between px-4 relative w-full h-full text-base font-bold rounded-xl border ${
-          props.shadowTailwind ? props.shadowTailwind : null
-        } ${props.bgTailwind ? props.bgTailwind : "bg-[#222222]"} ${
-          props.colorTailwind ? props.colorTailwind : null
-        }`}
+        className={`flex items-center text-start justify-between px-4 relative w-full h-full text-base font-bold rounded-xl border ${props.shadowTailwind} ${props.bgTailwind} ${props.colorTailwind}`}
         onClick={() => setOpen((prev) => !prev)}
         type="button"
         disabled={props.disable}

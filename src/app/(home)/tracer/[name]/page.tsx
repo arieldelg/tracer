@@ -1,6 +1,7 @@
+import { roboto } from "@/app/fonts";
 import IndividualTracerClientSide from "@/components/IndividualTracerClientSide";
 import { GetTracer } from "@/lib/type";
-import React from "react";
+import React, { FormEvent } from "react";
 
 type Props = {
   params: {
@@ -9,27 +10,43 @@ type Props = {
 };
 
 // ! server action that i can export to re-use it
-export const tracerByIdServerAction = async (
-  id: string
-): Promise<GetTracer[]> => {
-  "use server";
-  const response = await fetch("http://localhost:8000/api/tracerById/" + id, {
-    cache: "no-cache",
-    next: { tags: ["home"] },
-  });
-  const data = await response.json();
-  return data;
-};
 
 const Tracer = async ({ params }: Props) => {
   // ! caching the id from url
   const length = params.name.split("-").length;
   const id = params.name.split("-")[length - 1];
   // ! passing id to server action
-  const data = await tracerByIdServerAction(id);
-  console.log(data);
+
+  const response = await fetch(`${process.env.API_URL}/api/tracerById/` + id, {
+    next: { tags: ["home"] },
+  });
+
+  const data: GetTracer[] = await response.json();
+
+  // ! use and drop Server Action
   return (
     <div className="space-y-4">
+      {
+        // ! title
+      }
+      <h1 className={`text-3xl ${roboto.className} text-center `}>
+        Detalles del Tracer
+      </h1>
+      <div className="flex justify-between">
+        <div
+          className={`flex flex-col items-center text-sm ${roboto.className}`}
+        >
+          <p>Date Created at:</p>
+          <p>{data[0].dateCreated}</p>
+        </div>
+        <div
+          className={`flex flex-col items-center text-sm ${roboto.className}`}
+        >
+          <p>Date Updated at:</p>
+          <p>{data[0].dateUpdated}</p>
+        </div>
+      </div>
+
       <IndividualTracerClientSide data={data} />
     </div>
   );

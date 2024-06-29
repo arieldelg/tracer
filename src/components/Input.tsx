@@ -1,5 +1,5 @@
-"use client";
 // ! Client Component
+"use client";
 import {
   ChangeEvent,
   Dispatch,
@@ -11,8 +11,20 @@ import {
 // ! type for the input
 
 type PropsInput = {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: {
+    title: string;
+    priority: string;
+    complete: boolean;
+    text: string;
+  };
+  setValue: Dispatch<
+    SetStateAction<{
+      title: string;
+      priority: string;
+      complete: boolean;
+      text: string;
+    }>
+  >;
   enterSearch?: (event: KeyboardEvent<HTMLInputElement>) => void;
   name?: string | undefined;
   id?: string | undefined;
@@ -40,13 +52,12 @@ type PropsInput = {
     | "text-3xl"
     | "text-4xl";
   color?: string;
-  colorTailwind?: string;
+  colorTailwind?: string | undefined;
   shadowBoxTailwind?: string;
   boxShadow?: string;
 };
 
 const Input = (props: PropsInput) => {
-  console.log(props.border);
   return (
     <input
       style={{
@@ -63,22 +74,23 @@ const Input = (props: PropsInput) => {
       }
       className={`w-full h-16 ${props.border ? props.border : "border-none"} ${
         props.rounded !== null ? props.rounded : "rounded-none"
-      } ${
-        props.bgColorTailwind ? props.bgColorTailwind : "bg-[#222222]"
-      } outline-none p-2 ${
+      } ${props.bgColorTailwind} outline-none p-2 ${
         props.fontTailwind ? props.fontTailwind : "text-xl"
-      } ${props.colorTailwind ? props.colorTailwind : null} ${
-        props.colorTailwind ? "placeholder:text-black/50" : null
-      } ${props.shadowBoxTailwind ? props.shadowBoxTailwind : null}`}
+      } ${props.colorTailwind} ${
+        props.colorTailwind !== undefined ? "placeholder:text-black/50" : null
+      } ${props.shadowBoxTailwind}`}
       onChange={(e: ChangeEvent<HTMLInputElement>) =>
-        props.setValue(e.target.value)
+        props.setValue({
+          ...props.value,
+          title: e.target.value,
+        })
       }
       onKeyDown={(event) => {
         if (props.enterSearch !== undefined) {
           props.enterSearch(event);
         }
       }}
-      value={props.value}
+      value={props.value.title}
       disabled={props.disable}
     />
   );
