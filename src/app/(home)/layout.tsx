@@ -13,7 +13,7 @@ const routes = [
     icons: <IoSettingsOutline size={30} />,
     text: "Settings",
   },
-  { url: "/tracers", icons: <FaNoteSticky size={30} />, text: "Tracers" },
+  { url: "/tracer", icons: <FaNoteSticky size={30} />, text: "Tracers" },
   { url: "/contacts", icons: <RiContactsFill size={30} />, text: "Contacts" },
 ];
 
@@ -44,6 +44,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div>
             <Button
               url="/login"
+              type="button"
               color="red"
               name="Log Out"
               onlyOne={true}

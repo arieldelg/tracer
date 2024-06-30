@@ -13,6 +13,7 @@ type Props = {
 };
 
 const IndividualTracerClientSide = ({ data }: Props) => {
+  // ! states from values to change
   const [values, setValues] = useState<{
     title: string;
     priority: string;
@@ -24,6 +25,7 @@ const IndividualTracerClientSide = ({ data }: Props) => {
     priority: data[0].priority,
     text: data[0].text,
   });
+  // ! state that contains property styles
   const [object, setObject] = useState<{
     name: string;
     color: string | undefined;
@@ -37,9 +39,11 @@ const IndividualTracerClientSide = ({ data }: Props) => {
     shadow: undefined,
     buttonStatus: "bg-blue-500",
   });
+  //! states that contain sending fetch states
   const [disable, setDisable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
 
+  //! function to handle form and fetch to server action
   const handleForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (object.name == "Edit") {
@@ -81,8 +85,12 @@ const IndividualTracerClientSide = ({ data }: Props) => {
   return (
     <>
       <form onSubmit={(e) => handleForm(e)} className="space-y-4">
+        {
+          //! button
+        }
         <Button
           onlyOne={true}
+          type="submit"
           name={object.name}
           bgColorTailwind={object.buttonStatus}
           font={roboto.className}
@@ -107,6 +115,9 @@ const IndividualTracerClientSide = ({ data }: Props) => {
             </svg>
           )}
         </Button>
+        {
+          //!input
+        }
         <div className="space-y-4">
           <label htmlFor="title" className={`text-3xl ${roboto.className}`}>
             Title
@@ -126,7 +137,9 @@ const IndividualTracerClientSide = ({ data }: Props) => {
             shadowBoxTailwind={object?.shadow}
           />
         </div>
-
+        {
+          // !div of select and mark as done
+        }
         <div className="flex flex-row z-40 w-full space-x-4">
           <div className="flex flex-col w-1/2 justify-between items-start gap-y-4">
             <label
@@ -184,6 +197,9 @@ const IndividualTracerClientSide = ({ data }: Props) => {
             )}
           </div>
         </div>
+        {
+          // !text area
+        }
         <div className="flex flex-col space-y-4">
           <label htmlFor="text" className={`text-3xl ${roboto.className}`}>
             Text
@@ -208,16 +224,6 @@ const IndividualTracerClientSide = ({ data }: Props) => {
           />
         </div>
       </form>
-      {
-        // ! here goes the title can be server component
-      }
-      {
-        // ! here goes the container of select-option and mark as done optional has to be client component
-      }
-
-      {
-        // ! Here goes the label and text of the tracer CLIENT
-      }
     </>
   );
 };

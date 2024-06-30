@@ -3,34 +3,19 @@ import { HiOutlineExclamationTriangle } from "react-icons/hi2";
 import { BsExclamationCircle } from "react-icons/bs";
 import ContactCard from "@/components/ContactCard";
 import ButtonAddTracer from "@/components/ButtonAddTracer";
-import { Tracer } from "@/lib/type";
 import SectionTracerCards from "@/components/SectionTracerCards";
 import { BsExclamationDiamond } from "react-icons/bs";
+import { getTracers } from "@/services/getTracers";
 
 const Home = async () => {
   // ! server action of getting tracer
-
-  // ! call the url env
-  const apiUrl = process.env.API_URL;
-  // !making the fetch
-  const response = await fetch(`${apiUrl}/api/addTracer`, {
-    next: { tags: ["home"] },
-  });
+  const data = await getTracers();
+  console.log(data);
   //! manipulating the data
-  const data: Tracer[] = await response.json();
-  const noElements = "Add a new Tracer";
-  const high = data.filter((element) => element._id === "High").length
-    ? data.filter((element) => element._id === "High")
-    : noElements;
-  const medium =
-    data.filter((element) => element._id === "Medium").length > 0
-      ? data.filter((element) => element._id === "Medium")
-      : noElements;
-  const low =
-    data.filter((element) => element._id === "Low").length > 0
-      ? data.filter((element) => element._id === "Low")
-      : noElements;
-  // console.log(low);
+  const high = data.filter((element) => element._id === "High");
+  const medium = data.filter((element) => element._id === "Medium");
+  const low = data.filter((element) => element._id === "Low");
+  console.log(high);
   return (
     <>
       {

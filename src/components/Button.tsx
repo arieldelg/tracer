@@ -1,9 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React from // DetailedHTMLProps, // ButtonHTMLAttributes,
-// useEffect,
-// useState,
-"react";
+import React from "react"; // useState, // useEffect, // DetailedHTMLProps, // ButtonHTMLAttributes,
 
 type Props = {
   name: string;
@@ -16,13 +13,12 @@ type Props = {
   fetch?: any;
   onClick?: () => void;
   loading?: boolean;
+  type: "button" | "submit" | "reset" | undefined;
 };
 
 const Button = (props: Props) => {
   const router = useRouter();
-  // const [type, setType] = useState<"button" | "submit" | "reset" | undefined>(
-  //   "button"
-  // );
+
   const handleColor = () => {
     let color: string;
     switch (props.color) {
@@ -37,13 +33,7 @@ const Button = (props: Props) => {
     }
     return color;
   };
-  // useEffect(() => {
-  //   if (props.name !== "Edit") {
-  //     setType("submit");
-  //   } else {
-  //     setType("button");
-  //   }
-  // }, [props.name]);
+
   if (props.url === "back") {
     return (
       <button
@@ -62,7 +52,7 @@ const Button = (props: Props) => {
     return (
       <button
         style={{ backgroundColor: props.color }}
-        type="submit"
+        type={props.type}
         className={`${props.onlyOne ? "w-full" : "w-1/2"} ${
           props.bgColorTailwind
         } h-16 ${handleColor()} rounded-lg border text-2xl font-bold ${

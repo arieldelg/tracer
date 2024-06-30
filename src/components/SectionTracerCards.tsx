@@ -9,7 +9,7 @@ import { updateTracerById } from "@/services/updateTracerById";
 import { deleteTracerById } from "@/services/deleteTracerById";
 
 type Props = {
-  data: Array[] | string;
+  data: Array[];
   title: string;
   icon: JSX.Element;
 };
@@ -20,11 +20,14 @@ type Array = {
 };
 
 const SectionTracerCards = ({ data, title, icon }: Props) => {
+  const urlSelect = title.split(" ")[0];
   let validate: TracerElement[];
   let id: string;
-  if (typeof data !== "string") {
+  if (data.length > 0) {
     validate = data[0].tracer;
     id = data[0]._id;
+  } else {
+    validate = [];
   }
   //! using optimistic
   const [tracerOptimistic, setTracerOptimistic] = useOptimistic(
@@ -122,33 +125,50 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
       </div>
       <div className="py-8 space-y-6">
         {typeof data === "string" && <p>{data}</p>}
-        {tracerOptimistic?.slice(0, number).map((element) => {
-          const url = element.title.split(" ").join("-");
+        {tracerOptimistic.length > 0 ? (
+          tracerOptimistic?.slice(0, number).map((element) => {
+            const url = element.title.split(" ").join("-");
 
-          return (
-            <Link
-              key={element._id}
-              href={`tracer/${url}-${element._id}`}
-              className="w-full h-16 border rounded-xl shadow-6xl bg-[#222222] flex items-center justify-between px-2"
-            >
-              <div className="flex space-x-2 items-center">
-                <CiSquareCheck
-                  size={42}
-                  className={`${element.complete ? "text-green-500" : null}`}
-                  onClick={(e) => handleCheck(e, element)}
+            return (
+              <Link
+                key={element._id}
+                href={`tracer/${url}-${element._id}`}
+                className="w-full h-16 border rounded-xl shadow-6xl bg-[#222222] flex items-center justify-between px-2"
+              >
+                <div className="flex space-x-2 items-center">
+                  <CiSquareCheck
+                    size={42}
+                    className={`${element.complete ? "text-green-500" : null}`}
+                    onClick={(e) => handleCheck(e, element)}
+                  />
+                  <p className={`text-xl capitalize ${roboto.className}`}>
+                    {element.title}
+                  </p>
+                </div>
+                <FaRegCircleXmark
+                  size={40}
+                  onClick={(e) => handleDelete(e, element)}
                 />
-                <p className={`text-xl capitalize ${roboto.className}`}>
-                  {element.title}
-                </p>
-              </div>
-              <FaRegCircleXmark
-                size={40}
-                onClick={(e) => handleDelete(e, element)}
-              />
+              </Link>
+            );
+          })
+        ) : (
+          <Link
+            href={`/home/new_tracer?priority=${urlSelect}`}
+            className={`${roboto.className} w-full p-0`}
+          >
+            <p className="text-center">Try adding a new Tracer!!</p>
+          </Link>
+        )}
+        <div>
+          {tracerOptimistic.length > number && (
+            <Link href={"/tracer"}>
+              <p className="text-center underline underline-offset-4">
+                Show More +
+              </p>
             </Link>
-          );
-        })}
-        <div>{tracerOptimistic.length > number && <p>show more here</p>}</div>
+          )}
+        </div>
       </div>
     </>
   );

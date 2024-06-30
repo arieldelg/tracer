@@ -5,11 +5,17 @@ export const metadata: Metadata = {
   title: "Add New Tracer",
   description: "Page that adds new Tracer to your account",
 };
+type Props = {
+  searchParams: {
+    priority: string;
+  };
+};
 
-const NewTracer = () => {
+const NewTracer = ({ searchParams: { priority } }: Props) => {
+  console.log(priority);
   return (
     <section className="space-y-8">
-      <AddTracerClientSide />
+      <AddTracerClientSide newWithSelect={priority} />
     </section>
   );
 };
