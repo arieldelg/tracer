@@ -3,8 +3,6 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Input_Select/Select";
-// import { CiCircleCheck } from "react-icons/ci";
-// import { FaRegCircleXmark } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 // import { roboto } from "@/app/fonts";
 import { addTracerServerAction } from "@/services/actions";
@@ -33,18 +31,32 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
     priority: priority,
     text: "",
   });
-  console.log(values);
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
   const [send, setSend] = useState<boolean>();
 
   const handleSumbit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let level: number;
+    switch (values.priority) {
+      case "High":
+        level = 1;
+        break;
+      case "Medium":
+        level = 4;
+        break;
+      case "Low":
+        level = 7;
+        break;
+      default:
+        level = 0;
+    }
     setSend(true);
     const response = await addTracerServerAction({
       title: values.title,
       priority: values.priority,
       text: values.text,
       complete: values.complete,
+      level: level,
     });
     console.log(response);
     if (!response.ok) {
@@ -61,6 +73,7 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
         priority: "",
         text: "",
       });
+      level = 0;
       const { message } = response;
       setStatus({
         ok: true,
@@ -73,25 +86,6 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
       {
         // ! here goes the status when posting the data
       }
-      {/* <div
-        className={`bg-white rounded-xl text-black left-[calc(50%-156px)]  w-[312px] h-28 flex items-center justify-center space-x-4 absolute transition-all -translate-y-[290px] z-50 ${
-          send
-            ? "duration-500 shadow-5xl transition-all translate-y-[calc(100%+5px)]"
-            : null
-        }`}
-      >
-        {status !== undefined && status.ok ? (
-          <>
-            <CiCircleCheck size={40} className="text-green-500" />
-            <p className={`text-xl ${roboto.className} `}>{status?.message}</p>
-          </>
-        ) : (
-          <>
-            <FaRegCircleXmark size={40} className="text-red-500" />
-            <p className={`text-xl ${roboto.className} `}>{status?.message}</p>
-          </>
-        )}
-      </div> */}
       {
         // ! form that handles the new tracer
       }

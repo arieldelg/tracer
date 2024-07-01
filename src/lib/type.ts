@@ -21,6 +21,7 @@ export type Sort = {
 export interface Tracer {
   _id: string;
   tracer: TracerElement[];
+  level: number;
 }
 
 export interface TracerElement {

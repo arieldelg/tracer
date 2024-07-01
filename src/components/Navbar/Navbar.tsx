@@ -9,6 +9,13 @@ import LinkComponent from "./Link";
 import React, { useEffect, useState } from "react";
 import { ReplyIcon } from "@primer/octicons-react";
 import { roboto } from "@/app/fonts";
+import { usePathname } from "next/navigation";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FaNoteSticky } from "react-icons/fa6";
+import { RiContactsFill } from "react-icons/ri";
+import { FaPowerOff } from "react-icons/fa";
+import Button from "@/components/Button";
+import { MdCookie } from "react-icons/md";
 
 // ! type of Routes
 
@@ -35,10 +42,20 @@ const routes: TypeRoutes[] = [
   },
 ];
 
-const Navbar = ({ children }: { children: React.ReactNode }) => {
+const routesSideMenu = [
+  {
+    url: "/settings",
+    icons: <IoSettingsOutline size={30} />,
+    text: "Settings",
+  },
+  { url: "/tracer", icons: <FaNoteSticky size={30} />, text: "Tracers" },
+  { url: "/contacts", icons: <RiContactsFill size={30} />, text: "Contacts" },
+  { url: "/cookies", icons: <MdCookie size={30} />, text: "Cookies" },
+];
+
+const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [_document, set_Document] = useState<Document>();
-
   {
     // ! aqui estoy mostrando que lo guardo en un estado
   }
@@ -114,7 +131,34 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
             </h1>
           </div>
           <div className="w-full flex flex-col justify-between h-[90%] pt-4">
-            {children}
+            <div className={`h-5/6 border-t-2 border-white/10 pl-4 pt-4`}>
+              <ul className={roboto.className}>
+                {routesSideMenu.map((element) => {
+                  return (
+                    <li key={element.url}>
+                      <LinkComponent
+                        url={element.url}
+                        icon={element.icons}
+                        text={element.text}
+                        onClick={setOpen}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div>
+              <Button
+                url="/login"
+                type="button"
+                color="red"
+                name="Log Out"
+                onlyOne={true}
+                font={roboto.className}
+              >
+                {<FaPowerOff />}
+              </Button>
+            </div>
           </div>
         </div>
 

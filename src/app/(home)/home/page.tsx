@@ -10,12 +10,10 @@ import { getTracers } from "@/services/getTracers";
 const Home = async () => {
   // ! server action of getting tracer
   const data = await getTracers();
-  console.log(data);
   //! manipulating the data
   const high = data.filter((element) => element._id === "High");
   const medium = data.filter((element) => element._id === "Medium");
   const low = data.filter((element) => element._id === "Low");
-  console.log(high);
   return (
     <>
       {

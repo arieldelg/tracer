@@ -7,6 +7,7 @@ type PropsLink = {
   url: string;
   icon?: JSX.Element;
   text?: string;
+  onClick?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const LinkComponent = (props: PropsLink) => {
@@ -26,14 +27,20 @@ const LinkComponent = (props: PropsLink) => {
       setText(props.text);
     }
   }, [props.icon, props.text]);
+
   return (
     <Link
       href={props.url}
       className={` ${one ? null : "flex space-x-4 py-[4px] items-center"}`}
+      onClick={() => {
+        if (props.onClick) {
+          return props.onClick(false);
+        }
+      }}
     >
       <p
         className={`${
-          url === props.url ? "text-green-500 w-8 scale-150" : "w-8"
+          url === props.url ? `text-green-500 w-8 scale-150 delay-75 ` : "w-8"
         }`}
       >
         {icon}

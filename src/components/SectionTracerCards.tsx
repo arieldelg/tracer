@@ -162,7 +162,7 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
         )}
         <div>
           {tracerOptimistic.length > number && (
-            <Link href={"/tracer"}>
+            <Link href={`/tracer?priority=${urlSelect}`}>
               <p className="text-center underline underline-offset-4">
                 Show More +
               </p>

@@ -9,14 +9,15 @@ const schema = yup.object({
   complete: yup.boolean().required(),
 });
 
-type Props = {
+type PropsAddTracer = {
   title: string;
   priority: string;
   text: string;
   complete: boolean;
+  level: number;
 };
 
-const addTracerServerAction = async (props: Props) => {
+const addTracerServerAction = async (props: PropsAddTracer) => {
   try {
     const res = await schema.validate(props);
     const response = await fetch(`${process.env.API_URL}/api/addTracer`, {
