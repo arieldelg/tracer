@@ -2,7 +2,7 @@
 import { TracerElement } from "@/lib/type";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiSquareCheck } from "react-icons/ci";
-import React, { startTransition, useOptimistic, useState } from "react";
+import React, { startTransition, useOptimistic } from "react";
 import { roboto } from "@/app/fonts";
 import Link from "next/link";
 import { updateTracerById } from "@/services/updateTracerById";

@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Input_Select/Select";
@@ -33,7 +33,8 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
   });
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
   const [send, setSend] = useState<boolean>();
-
+  // ! need to use this state
+  console.log(status);
   const handleSumbit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let level: number;

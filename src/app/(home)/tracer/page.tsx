@@ -1,4 +1,4 @@
-import { getTracers } from "@/services/getTracers";
+// import { getTracers } from "@/services/getTracers";
 
 type Props = {
   searchParams: {
@@ -7,13 +7,14 @@ type Props = {
 };
 
 const Tracer = async ({ searchParams: { priority } }: Props) => {
-  const data = await getTracers();
-  const usingParams = data.filter((element) => element._id === priority);
-  const restParams = data
-    .filter((element) => element._id !== priority)
-    .sort((a, b) => a.level - b.level);
-  const withoutParams = data.sort((a, b) => a.level - b.level);
-  console.log(withoutParams, "aloha");
+  console.log(priority);
+  // const data = await getTracers();
+  // const usingParams = data.filter((element) => element._id === priority);
+  // const restParams = data
+  //   .filter((element) => element._id !== priority)
+  //   .sort((a, b) => a.level - b.level);
+  // const withoutParams = data.sort((a, b) => a.level - b.level);
+  // console.log(withoutParams, "aloha");
   // console.log(data);
   return (
     <section>

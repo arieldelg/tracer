@@ -1,7 +1,7 @@
 import { roboto } from "@/app/fonts";
 import IndividualTracerClientSide from "@/components/IndividualTracerClientSide";
 import { GetTracer } from "@/lib/type";
-import React, { FormEvent } from "react";
+import React from "react";
 
 type Props = {
   params: {

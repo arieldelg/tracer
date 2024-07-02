@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: "as1.ftcdn.net",
         protocol: "https",
       },
+      {
+        hostname: "merxstore.mx",
+        protocol: "https",
+      },
     ],
   },
 };

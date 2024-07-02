@@ -9,9 +9,8 @@ import LinkComponent from "./Link";
 import React, { useEffect, useState } from "react";
 import { ReplyIcon } from "@primer/octicons-react";
 import { roboto } from "@/app/fonts";
-import { usePathname } from "next/navigation";
 import { IoSettingsOutline } from "react-icons/io5";
-import { FaNoteSticky } from "react-icons/fa6";
+import { FaNoteSticky, FaCartShopping } from "react-icons/fa6";
 import { RiContactsFill } from "react-icons/ri";
 import { FaPowerOff } from "react-icons/fa";
 import Button from "@/components/Button";
@@ -51,6 +50,7 @@ const routesSideMenu = [
   { url: "/tracer", icons: <FaNoteSticky size={30} />, text: "Tracers" },
   { url: "/contacts", icons: <RiContactsFill size={30} />, text: "Contacts" },
   { url: "/cookies", icons: <MdCookie size={30} />, text: "Cookies" },
+  { url: "/products", icons: <FaCartShopping size={30} />, text: "Products" },
 ];
 
 const Navbar = () => {
