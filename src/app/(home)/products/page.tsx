@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 const Products = () => {
   const product = cookies();
-  const cart = product.get("cart")?.value;
-  const object = JSON.parse(cart!);
+  const cart = product.get("cart")?.value ?? "{}";
+  const object = JSON.parse(cart);
   let total: number = 0;
   for (const key in object) {
     if (Object.prototype.hasOwnProperty.call(object, key)) {
