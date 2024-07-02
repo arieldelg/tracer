@@ -1,7 +1,6 @@
-import { FaRegMinusSquare } from "react-icons/fa";
-import { FaRegPlusSquare } from "react-icons/fa";
 import Image from "next/image";
 import { ArrayProps } from "@/lib/muckdb";
+import ComponentClientProductCheckoutCard from "./ComponentClientProductCheckoutCard";
 
 export type PropsProductCheckoutCard = {
   id?: string;
@@ -12,6 +11,7 @@ export type PropsProductCheckoutCard = {
 const ProductCheckoutCard = ({
   products,
   quantity,
+  id,
 }: PropsProductCheckoutCard) => {
   const precio = quantity * products.precio;
   return (
@@ -39,13 +39,7 @@ const ProductCheckoutCard = ({
         // !3
       }
       <div className="w-2/5 h-full flex items-center justify-between px-2">
-        <button className="bg-red-500 rounded-lg p-[2px]" onClick={}>
-          <FaRegMinusSquare size={35} className="text-white" />
-        </button>
-        <p className="text-3xl font-bold">{quantity}</p>
-        <button className="bg-green-500 rounded-lg p-[2px]">
-          <FaRegPlusSquare size={35} className="text-white" />
-        </button>
+        <ComponentClientProductCheckoutCard id={id} quantity={quantity} />
       </div>
     </div>
   );

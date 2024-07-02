@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react"; // useState, // useEffect, // DetailedHTMLProps, // ButtonHTMLAttributes,
 
 type Props = {
-  name: string;
+  name?: string;
   color?: string;
   bgColorTailwind?: string;
   url?: string;

@@ -26,4 +26,15 @@ const deleteCookie = (id: number) => {
   setCookie("cart", JSON.stringify(cookie));
 };
 
-export { addCookie, deleteCookie };
+const deleteSingleCookie = (id: string) => {
+  const cookie = getCookieCart();
+  if (cookie[id] && cookie[id] !== 0) {
+    cookie[id] -= 1;
+    if (cookie[id] === 0) {
+      delete cookie[id];
+    }
+  }
+  setCookie("cart", JSON.stringify(cookie));
+};
+
+export { addCookie, deleteCookie, deleteSingleCookie };
