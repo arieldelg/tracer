@@ -1,7 +1,12 @@
 import Navbar from "@/components/Navbar/Navbar";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  console.log("hola layout");
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth();
+  if (!session) {
+    redirect("/");
+  }
   return (
     <main className="relative">
       {
@@ -12,7 +17,5 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     </main>
   );
 };
-
-//[calc(100vh-130px)]
 
 export default Layout;

@@ -192,7 +192,6 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
             bgColorTailwind="bg-green-500"
             onlyOne={false}
             loading={send}
-            // onClick={() => handleSendData()}
           >
             {send && (
               <svg

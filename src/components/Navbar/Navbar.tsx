@@ -15,6 +15,7 @@ import { RiContactsFill } from "react-icons/ri";
 import { FaPowerOff } from "react-icons/fa";
 import Button from "@/components/Button";
 import { MdCookie } from "react-icons/md";
+import { signOut } from "next-auth/react";
 
 // ! type of Routes
 
@@ -155,6 +156,7 @@ const Navbar = () => {
                 name="Log Out"
                 onlyOne={true}
                 font={roboto.className}
+                onClick={signOut}
               >
                 {<FaPowerOff />}
               </Button>

@@ -27,7 +27,6 @@ const page = () => {
       }
     });
   }
-  // console.log(viewProducts);
   const totalPriceArray = () => {
     if (viewProducts.length > 0) {
       const totalPriceArray = viewProducts

@@ -19,7 +19,6 @@ const updateTracerById = async (props: Props) => {
     complete: props.complete,
     priority: props.priority,
   };
-  // console.log(object, props);
   try {
     const response = await fetch(
       `${process.env.API_URL}/api/tracerById/` + props.id,
@@ -31,13 +30,10 @@ const updateTracerById = async (props: Props) => {
         body: JSON.stringify(object),
       }
     );
-    // console.log(response.status, "cliente");
-    // console.log(response)
     if (!response.ok) {
       return "error en el response";
     }
 
-    // revalidatePath("/home");
     const data = await response.json();
     console.log(data);
     return data;
