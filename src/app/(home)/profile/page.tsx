@@ -8,7 +8,7 @@ const Profile = async () => {
   const urlSplit = url.get("custom-header")?.split("/")[1];
   console.log(urlSplit);
   const session = await auth();
-  console.log(session);
+  console.log(session?.user);
   return (
     <section className="w-full h-auto">
       {
@@ -30,6 +30,9 @@ const Profile = async () => {
         <h1 className="text-4xl font-bold text-center">
           {session?.user?.name}
         </h1>
+        <p className="text-center capitalize text-sm">
+          {session?.user?.roles?.join(", ")}
+        </p>
         <p className="text-sm text-center">{session?.user?.email}</p>
         <p className={`text-justify text-lg ${roboto.className}`}>
           Aveces siento que el mundo gira alrededor de mi, no es mi culpa ser el
