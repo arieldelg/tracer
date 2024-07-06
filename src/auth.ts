@@ -20,6 +20,7 @@ export interface DataAuth {
   createdAt: Date;
   updatedAt: Date;
 }
+//! credenciales quedan pendientes
 
 const prisma = new PrismaClient();
 

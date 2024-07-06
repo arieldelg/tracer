@@ -6,14 +6,16 @@ import ButtonAddTracer from "@/components/ButtonAddTracer";
 import SectionTracerCards from "@/components/SectionTracerCards";
 import { BsExclamationDiamond } from "react-icons/bs";
 import { getTracers } from "@/services/getTracers";
+import { auth } from "@/auth";
 
 const Home = async () => {
   // ! server action of getting tracer
-  const data = await getTracers();
+  const session = await auth();
+  const data = await getTracers(session?.user?.id ?? false);
   //! manipulating the data
-  const high = data.filter((element) => element._id === "High");
-  const medium = data.filter((element) => element._id === "Medium");
-  const low = data.filter((element) => element._id === "Low");
+  const high = data.filter((element) => element.priority === "High");
+  const medium = data.filter((element) => element.priority === "Medium");
+  const low = data.filter((element) => element.priority === "Low");
   return (
     <>
       {

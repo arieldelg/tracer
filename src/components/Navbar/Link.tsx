@@ -27,12 +27,13 @@ const LinkComponent = (props: PropsLink) => {
       setText(props.text);
     }
   }, [props.icon, props.text]);
-
   return (
     <Link
       href={props.url}
       className={` ${one ? null : "flex space-x-4 py-[4px] items-center"}`}
       onClick={() => {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
         if (props.onClick) {
           return props.onClick(false);
         }

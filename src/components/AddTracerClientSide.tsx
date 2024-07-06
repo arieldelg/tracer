@@ -6,6 +6,7 @@ import Select from "./Input_Select/Select";
 import { FaCheck } from "react-icons/fa";
 // import { roboto } from "@/app/fonts";
 import { addTracerServerAction } from "@/services/actions";
+import { Session } from "@/app/(home)/home/new_tracer/page";
 
 export type InputProps = {
   title: string;
@@ -16,9 +17,11 @@ export type InputProps = {
 
 type Props = {
   newWithSelect: string;
+  session: Session;
 };
 
-const AddTracerClientSide = ({ newWithSelect }: Props) => {
+const AddTracerClientSide = ({ newWithSelect, session }: Props) => {
+  console.log(session.user, "home");
   let priority: string;
   if (newWithSelect !== undefined) {
     priority = newWithSelect;
@@ -34,7 +37,6 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
   const [send, setSend] = useState<boolean>();
   // ! need to use this state
-  console.log(status);
   const handleSumbit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let level: number;
@@ -58,8 +60,8 @@ const AddTracerClientSide = ({ newWithSelect }: Props) => {
       text: values.text,
       complete: values.complete,
       level: level,
+      id: session.user.id,
     });
-    console.log(response);
     if (!response.ok) {
       const { message } = response;
       return setStatus({

@@ -7,6 +7,7 @@ const schema = yup.object({
   priority: yup.string().required().min(1),
   text: yup.string().required().min(1),
   complete: yup.boolean().required(),
+  id: yup.string().required(),
 });
 
 type PropsAddTracer = {
@@ -15,6 +16,7 @@ type PropsAddTracer = {
   text: string;
   complete: boolean;
   level: number;
+  id: string;
 };
 
 const addTracerServerAction = async (props: PropsAddTracer) => {

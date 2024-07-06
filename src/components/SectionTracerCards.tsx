@@ -1,5 +1,5 @@
 "use client";
-import { TracerElement } from "@/lib/type";
+import { GetTracer } from "@/lib/type";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiSquareCheck } from "react-icons/ci";
 import React, { startTransition, useOptimistic } from "react";
@@ -9,30 +9,25 @@ import { updateTracerById } from "@/services/updateTracerById";
 import { deleteTracerById } from "@/services/deleteTracerById";
 
 type Props = {
-  data: Array[];
+  data: GetTracer[];
   title: string;
   icon: JSX.Element;
 };
 
-type Array = {
-  _id: string;
-  tracer: TracerElement[];
-};
-
 const SectionTracerCards = ({ data, title, icon }: Props) => {
   const urlSelect = title.split(" ")[0];
-  let validate: TracerElement[];
+  let validate: GetTracer[] = [];
   let id: string;
   if (data.length > 0) {
-    validate = data[0].tracer;
-    id = data[0]._id;
+    validate = data;
+    id = data[0].priority;
   } else {
     validate = [];
   }
   //! using optimistic
   const [tracerOptimistic, setTracerOptimistic] = useOptimistic(
-    validate!,
-    (state, { action, task }: { action: string; task: TracerElement }) => {
+    validate,
+    (state, { action, task }: { action: string; task: GetTracer }) => {
       switch (action) {
         case "delete":
           return state?.filter(({ _id }) => _id !== task._id);
@@ -45,6 +40,11 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
                 priority: task.priority,
                 text: task.text,
                 title: task.title,
+                dateCreated: task.dateCreated,
+                dateUpdated: task.dateUpdated,
+                level: task.level,
+                objectDay: task.objectDay,
+                tracerUserId: task.tracerUserId,
               };
             } else {
               return t;
@@ -59,7 +59,7 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
   // ! event handler to update tracer and calls a server action
   const handleCheck = (
     e: React.MouseEvent<SVGElement, MouseEvent>,
-    data: TracerElement
+    data: GetTracer
   ) => {
     e.preventDefault();
     startTransition(() =>
@@ -80,7 +80,7 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
 
   const handleDelete = (
     e: React.MouseEvent<SVGElement, MouseEvent>,
-    data: TracerElement
+    data: GetTracer
   ) => {
     e.preventDefault();
     startTransition(() =>

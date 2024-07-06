@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import AddTracerClientSide from "@/components/AddTracerClientSide";
 import type { Metadata } from "next";
 
@@ -11,11 +12,22 @@ type Props = {
   };
 };
 
-const NewTracer = ({ searchParams: { priority } }: Props) => {
-  console.log(priority);
+export type Session = {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+    roles: string[];
+    id: string;
+  };
+  expires: string;
+};
+
+const NewTracer = async ({ searchParams: { priority } }: Props) => {
+  const session = (await auth()) as Session;
   return (
     <section className="space-y-8">
-      <AddTracerClientSide newWithSelect={priority} />
+      <AddTracerClientSide newWithSelect={priority} session={session} />
     </section>
   );
 };

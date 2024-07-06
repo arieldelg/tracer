@@ -80,7 +80,9 @@ const Navbar = () => {
   };
 
   return (
-    <section className={`border-b-2 border-white/20`}>
+    <section
+      className={`border-b-2 border-white/20 fixed top-0 left-0 z-50 bg-[#222222] w-screen h-[130px]`}
+    >
       {
         // ! uper title and 3 bar icon
       }

@@ -1,15 +1,21 @@
 export type SaveTracer = {
-  title: string;
-  priority: string;
-  text: string;
-  complete: boolean;
-  dateCreated: string;
-  dateUpdated: string;
-  owner: string;
+  title: string; //
+  priority: string; //
+  text: string; //
+  complete: boolean; //
+  dateCreated: string; //
+  dateUpdated: string; //
+  objectDay: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  tracerUserId: string; //
+  level: number; //
 };
 
 export interface GetTracer extends SaveTracer {
-  _id: "string";
+  _id: string; //
 }
 
 export type Sort = {
@@ -18,16 +24,19 @@ export type Sort = {
   low: GetTracer[];
 };
 
-export interface Tracer {
-  _id: string;
-  tracer: TracerElement[];
-  level: number;
-}
-
+// ! eliminar?
 export interface TracerElement {
-  _id: string;
-  text: string;
-  priority: string;
   title: string;
+  priority: string;
+  text: string;
   complete: boolean;
+  dateCreated: string;
+  dateUpdated: string;
+  objectDay: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  tracerUserId: string;
+  level: number;
 }

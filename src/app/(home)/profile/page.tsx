@@ -1,14 +1,9 @@
-import { headers } from "next/headers";
 import Image from "next/image";
 import { roboto } from "@/app/fonts";
 import { auth } from "@/auth";
 
 const Profile = async () => {
-  const url = headers();
-  const urlSplit = url.get("custom-header")?.split("/")[1];
-  console.log(urlSplit);
   const session = await auth();
-  console.log(session?.user);
   return (
     <section className="w-full h-auto">
       {
