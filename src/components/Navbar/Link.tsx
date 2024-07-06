@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { setCookie } from "cookies-next";
 
 type PropsLink = {
   url: string;
@@ -34,6 +35,9 @@ const LinkComponent = (props: PropsLink) => {
       onClick={() => {
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
+        if (props.url === "/tracer") {
+          setCookie("filterTracer", "false");
+        }
         if (props.onClick) {
           return props.onClick(false);
         }

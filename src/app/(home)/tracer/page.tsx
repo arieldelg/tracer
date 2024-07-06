@@ -1,8 +1,8 @@
-import { auth } from "@/auth";
 import TracerComponent from "@/components/TracerComponent";
 import { GetTracer } from "@/lib/type";
 import filterTracers from "@/services/filterTracers";
 import TitleOptionsTracerPage from "@/components/TitleOptionsTracerPage";
+import { cookies } from "next/headers";
 
 type Props = {
   searchParams: {
@@ -11,8 +11,13 @@ type Props = {
 };
 
 const TracerPage = async ({ searchParams: { priority } }: Props) => {
-  const session = await auth();
-  const data = await filterTracers(session?.user?.id ?? "no-id", "false");
+  const getMyCookie = cookies();
+  const cookie = getMyCookie.get("filterTracer")?.value ?? "false";
+  const data = await filterTracers(cookie);
+  console.log(data);
+  if (typeof data === "string") {
+    return;
+  }
   let usingParams: GetTracer[] = [];
   let restParams: GetTracer[] = [];
   if (priority) {
@@ -20,16 +25,16 @@ const TracerPage = async ({ searchParams: { priority } }: Props) => {
     restParams = data
       .filter((element) => element.priority !== priority)
       .sort((a, b) => a.level - b.level);
-    console.log(usingParams, "usingParams");
-    console.log(restParams, "restParams");
+    // console.log(usingParams, "usingParams");
+    // console.log(restParams, "restParams");
   } else {
     usingParams = data;
   }
-  console.log(usingParams, "using params");
+  // console.log(usingParams, "using params");
   return (
     <section className="space-y-4 h-auto w-full">
       <div>
-        <TitleOptionsTracerPage />
+        <TitleOptionsTracerPage cookie={cookie} />
       </div>
       <div className="space-y-4">
         {usingParams.map((element) => {

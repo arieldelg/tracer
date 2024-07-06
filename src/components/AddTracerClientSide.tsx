@@ -35,6 +35,7 @@ const AddTracerClientSide = ({ newWithSelect, session }: Props) => {
     text: "",
   });
   const [status, setStatus] = useState<{ ok: boolean; message: string }>();
+  console.log(status);
   const [send, setSend] = useState<boolean>();
   // ! need to use this state
   const handleSumbit = async (e: FormEvent<HTMLFormElement>) => {

@@ -1,4 +1,5 @@
 "use client";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react"; // useState, // useEffect, // DetailedHTMLProps, // ButtonHTMLAttributes,
 
@@ -14,6 +15,7 @@ type Props = {
   onClick?: () => void;
   loading?: boolean;
   type: "button" | "submit" | "reset" | undefined;
+  action?: string;
 };
 
 const Button = (props: Props) => {
@@ -33,6 +35,14 @@ const Button = (props: Props) => {
     }
     return color;
   };
+
+  // const handleLogout = async (onclick: () => void) => {
+  //   try {
+  //     await logout();
+  //   } finally {
+  //     onclick();
+  //   }
+  // };
 
   if (props.url === "back") {
     return (
@@ -60,7 +70,11 @@ const Button = (props: Props) => {
         } ${props.font && props.font}`}
         onClick={() => {
           if (props.onClick) {
-            return props.onClick();
+            if (props.action === "logout") {
+              signOut();
+            } else {
+              return props.onClick();
+            }
           }
         }}
       >

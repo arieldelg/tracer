@@ -4,9 +4,32 @@ import { roboto } from "@/app/fonts";
 import { useState } from "react";
 import { MdOpenInNew } from "react-icons/md";
 import Link from "next/link";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
-const TitleOptionsTracerPage = () => {
+type Props = {
+  cookie: string;
+};
+
+const TitleOptionsTracerPage = (props: Props) => {
   const [open, setOpen] = useState(false);
+  const route = useRouter();
+
+  const handleCookie = (object: { 1: string; 2: string }) => {
+    if (props.cookie === "false") {
+      setCookie("filterTracer", object[2]);
+    } else {
+      setCookie("filterTracer", object[2]);
+    }
+    if (props.cookie === object[2]) {
+      setCookie("filterTracer", object[1]);
+    } else if (props.cookie === object[1]) {
+      console.log("ok");
+
+      setCookie("filterTracer", object[2]);
+    }
+  };
+
   return (
     <div className="flex items-center justify-between relative h-12">
       <h1 className={`${roboto.className} text-3xl`}>Tracers</h1>
@@ -18,8 +41,24 @@ const TitleOptionsTracerPage = () => {
           <p className={`pb-2`}>Filter By:</p>
           <hr />
           <div className="space-y-2 py-2">
-            <p>Date Created</p>
-            <p>Date Updated</p>
+            <p
+              onClick={() => {
+                handleCookie({ 1: "dateCreated_1", 2: "dateCreated_-1" });
+                setOpen(false);
+                route.refresh();
+              }}
+            >
+              Date Created
+            </p>
+            <p
+              onClick={() => {
+                handleCookie({ 1: "dateUpdated_1", 2: "dateUpdated_-1" });
+                setOpen(false);
+                route.refresh();
+              }}
+            >
+              Date Updated
+            </p>
             <hr />
             <p>Priority</p>
             <p>&nbsp;&nbsp; High</p>

@@ -159,6 +159,7 @@ const Navbar = () => {
                 onlyOne={true}
                 font={roboto.className}
                 onClick={signOut}
+                action="logout"
               >
                 {<FaPowerOff />}
               </Button>

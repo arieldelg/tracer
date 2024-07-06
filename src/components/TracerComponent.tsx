@@ -5,7 +5,7 @@ type Props = {
 };
 
 const TracerComponent = ({ data }: Props) => {
-  console.log(data);
+  // console.log(data);
   let textStyle: string = "";
   switch (data.priority) {
     case "High":
