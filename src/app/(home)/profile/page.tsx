@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { auth } from "@/auth";
+import ImageProfile from "@/components/ImageProfile";
 import { roboto } from "@/config/fonts";
 
 const Profile = async () => {
@@ -10,16 +10,7 @@ const Profile = async () => {
         // ! aqui va la Imagen del Perfil (nota: el componente Image de next.js va a dentro de un div para poderlo munipularlo a tu gusto)
       }
       <div className="w-full h-52 flex items-center justify-center my-4">
-        <div className="w-52 h-52">
-          <Image
-            src={session?.user?.image!}
-            width={200}
-            height={200}
-            alt="ariel"
-            quality={100}
-            className="w-full h-full rounded-full object-cover"
-          />
-        </div>
+        <ImageProfile />
       </div>
       <div className="py-8 w-full space-y-4">
         <h1 className="text-4xl font-bold text-center">

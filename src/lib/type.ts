@@ -40,3 +40,14 @@ export interface TracerElement {
   tracerUserId: string;
   level: number;
 }
+
+export type Session = {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+    roles: string[];
+    id: string;
+  };
+  expires: string;
+};

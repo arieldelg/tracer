@@ -1,5 +1,6 @@
-import Navbar from "@/components/Navbar/Navbar";
 import { auth } from "@/auth";
+import { Navbar } from "@/components";
+import SideMenu from "@/components/SideMenu/sideMenu";
 import { redirect } from "next/navigation";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
@@ -19,7 +20,11 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       {
         // ! Navbar component (Client Component)
       }
+      <SideMenu />
       <Navbar />
+      {
+        // ! side Menu component the complete component
+      }
       <div className=" relative px-6 py-4 mt-[140px]">{children}</div>
     </main>
   );
