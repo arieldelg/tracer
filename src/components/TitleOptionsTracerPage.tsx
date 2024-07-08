@@ -6,6 +6,7 @@ import { MdOpenInNew } from "react-icons/md";
 import Link from "next/link";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { deleteCookie } from "@/services/resetCookie";
 
 type Props = {
   cookie: string;
@@ -61,9 +62,33 @@ const TitleOptionsTracerPage = (props: Props) => {
             </p>
             <hr />
             <p>Priority</p>
-            <p>&nbsp;&nbsp; High</p>
-            <p>&nbsp;&nbsp; Medium</p>
-            <p>&nbsp;&nbsp; Low</p>
+            <Link
+              href={`/tracer?priority=High`}
+              onClick={async () => {
+                await deleteCookie();
+                setOpen(false);
+              }}
+            >
+              <p>&nbsp;&nbsp; High</p>
+            </Link>
+            <Link
+              href={`/tracer?priority=Medium`}
+              onClick={async () => {
+                await deleteCookie();
+                setOpen(false);
+              }}
+            >
+              <p>&nbsp;&nbsp; Medium</p>
+            </Link>
+            <Link
+              href={`/tracer?priority=Low`}
+              onClick={async () => {
+                await deleteCookie();
+                setOpen(false);
+              }}
+            >
+              <p>&nbsp;&nbsp; Low</p>
+            </Link>
           </div>
           <hr />
           <Link href={"/filterTracer"}>

@@ -7,6 +7,7 @@ import { roboto } from "@/app/fonts";
 import Link from "next/link";
 import { updateTracerById } from "@/services/updateTracerById";
 import { deleteTracerById } from "@/services/deleteTracerById";
+import { deleteCookie } from "@/services/resetCookie";
 
 type Props = {
   data: GetTracer[];
@@ -162,7 +163,12 @@ const SectionTracerCards = ({ data, title, icon }: Props) => {
         )}
         <div>
           {tracerOptimistic.length > number && (
-            <Link href={`/tracer?priority=${urlSelect}`}>
+            <Link
+              href={`/tracer?priority=${urlSelect}`}
+              onClick={async () => {
+                await deleteCookie();
+              }}
+            >
               <p className="text-center underline underline-offset-4">
                 Show More +
               </p>

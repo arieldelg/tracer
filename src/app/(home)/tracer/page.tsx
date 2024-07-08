@@ -20,7 +20,8 @@ const TracerPage = async ({ searchParams: { priority } }: Props) => {
   }
   let usingParams: GetTracer[] = [];
   let restParams: GetTracer[] = [];
-  if (priority) {
+  console.log(cookie);
+  if (priority && cookie === "false") {
     usingParams = data.filter((element) => element.priority === priority);
     restParams = data
       .filter((element) => element.priority !== priority)
@@ -41,6 +42,7 @@ const TracerPage = async ({ searchParams: { priority } }: Props) => {
           return <TracerComponent key={element._id} data={element} />;
         })}
       </div>
+
       <div className="space-y-4">
         {restParams.map((element) => {
           return <TracerComponent key={element._id} data={element} />;
