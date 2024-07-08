@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import AuthProvider from "@/auth/components/AuthProvider";
-import { inter } from "./config/fonts";
+import { inter } from "../config/fonts";
 
 export const metadata: Metadata = {
   title: "Tracer",

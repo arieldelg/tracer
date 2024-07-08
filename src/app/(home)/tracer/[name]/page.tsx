@@ -1,4 +1,4 @@
-import { roboto } from "@/app/config/fonts";
+import { roboto } from "@/config/fonts";
 import IndividualTracerClientSide from "@/components/IndividualTracerClientSide";
 import { GetTracer } from "@/lib/type";
 import React from "react";

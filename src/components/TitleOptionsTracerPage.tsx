@@ -1,6 +1,6 @@
 "use client";
 import { LuListPlus } from "react-icons/lu";
-import { roboto } from "@/app/config/fonts";
+import { roboto } from "@/config/fonts";
 import { useState } from "react";
 import { MdOpenInNew } from "react-icons/md";
 import Link from "next/link";
