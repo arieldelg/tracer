@@ -8,7 +8,7 @@ import {
 import LinkComponent from "./Link";
 import React, { useEffect, useState } from "react";
 import { ReplyIcon } from "@primer/octicons-react";
-import { roboto } from "@/app/fonts";
+import { roboto } from "@/app/config/fonts";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaNoteSticky, FaCartShopping } from "react-icons/fa6";
 import { RiContactsFill } from "react-icons/ri";

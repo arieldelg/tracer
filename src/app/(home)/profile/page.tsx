@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { roboto } from "@/app/fonts";
 import { auth } from "@/auth";
+import { roboto } from "@/app/config/fonts";
 
 const Profile = async () => {
   const session = await auth();

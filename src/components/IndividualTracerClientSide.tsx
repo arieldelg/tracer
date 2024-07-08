@@ -5,7 +5,7 @@ import Select from "./Input_Select/Select";
 import { FaCheck } from "react-icons/fa";
 import { GetTracer } from "@/lib/type";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { roboto } from "@/app/fonts";
+import { roboto } from "@/app/config/fonts";
 import { updateTracerById } from "@/services/updateTracerById";
 
 type Props = {

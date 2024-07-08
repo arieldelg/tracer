@@ -3,7 +3,7 @@ import { GetTracer } from "@/lib/type";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiSquareCheck } from "react-icons/ci";
 import React, { startTransition, useOptimistic } from "react";
-import { roboto } from "@/app/fonts";
+import { roboto } from "@/app/config/fonts";
 import Link from "next/link";
 import { updateTracerById } from "@/services/updateTracerById";
 import { deleteTracerById } from "@/services/deleteTracerById";
