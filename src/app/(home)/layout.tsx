@@ -25,7 +25,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       {
         // ! side Menu component the complete component
       }
-      <div className=" relative px-6 py-4 mt-[140px]">{children}</div>
+      <section className=" relative px-6 py-4 mt-[140px]">{children}</section>
     </main>
   );
 };

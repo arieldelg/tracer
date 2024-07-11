@@ -2,15 +2,14 @@
 import { ReplyIcon } from "@primer/octicons-react";
 import { roboto } from "@/config/fonts";
 import { FaPowerOff } from "react-icons/fa";
-import Button from "@/components/Button";
 import { signOut } from "next-auth/react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaNoteSticky, FaCartShopping } from "react-icons/fa6";
 import { RiContactsFill } from "react-icons/ri";
 import { MdCookie } from "react-icons/md";
 import { sideMenu } from "@/store";
-import LinkComponent from "../Navbar/Link";
 import { useEffect } from "react";
+import { Button, LinkComponent } from "@/components";
 
 // ! array of routes (side menu)
 

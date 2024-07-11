@@ -7,3 +7,8 @@
 
 // npm i bcryptjs
 //npm i --save-dev @types/bcryptjs
+
+// String(true) == "true" //returns true
+// String(false) == "true" //returns false
+// String("true") == "true" //returns true
+// String("false") == "true" //returns false

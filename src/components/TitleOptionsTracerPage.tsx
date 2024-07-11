@@ -6,13 +6,12 @@ import { MdOpenInNew } from "react-icons/md";
 import Link from "next/link";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "@/services/resetCookie";
 
 type Props = {
   cookie: string;
 };
 
-const TitleOptionsTracerPage = (props: Props) => {
+export const TitleOptionsTracerPage = (props: Props) => {
   const [open, setOpen] = useState(false);
   const route = useRouter();
 
@@ -60,38 +59,9 @@ const TitleOptionsTracerPage = (props: Props) => {
             >
               Date Updated
             </p>
-            <hr />
-            <p>Priority</p>
-            <Link
-              href={`/tracer?priority=High`}
-              onClick={async () => {
-                await deleteCookie();
-                setOpen(false);
-              }}
-            >
-              <p>&nbsp;&nbsp; High</p>
-            </Link>
-            <Link
-              href={`/tracer?priority=Medium`}
-              onClick={async () => {
-                await deleteCookie();
-                setOpen(false);
-              }}
-            >
-              <p>&nbsp;&nbsp; Medium</p>
-            </Link>
-            <Link
-              href={`/tracer?priority=Low`}
-              onClick={async () => {
-                await deleteCookie();
-                setOpen(false);
-              }}
-            >
-              <p>&nbsp;&nbsp; Low</p>
-            </Link>
           </div>
           <hr />
-          <Link href={"/filterTracer"}>
+          <Link href={"/customFilter"}>
             <span className="flex items-center justify-between h-8 pt-2">
               <p>Custom</p>
               <MdOpenInNew size={20} />
@@ -102,5 +72,3 @@ const TitleOptionsTracerPage = (props: Props) => {
     </div>
   );
 };
-
-export default TitleOptionsTracerPage;

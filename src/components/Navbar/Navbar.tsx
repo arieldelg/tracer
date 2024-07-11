@@ -5,7 +5,7 @@ import {
   MagnifyingGlassIcon,
   HomeIcon,
 } from "@heroicons/react/24/solid";
-import LinkComponent from "./Link";
+import { LinkComponent } from "@/components";
 import React from "react";
 import { sideMenu } from "@/store";
 

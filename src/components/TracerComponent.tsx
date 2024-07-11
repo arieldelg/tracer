@@ -7,7 +7,7 @@ type Props = {
   data: GetTracer;
 };
 
-const TracerComponent = ({ data }: Props) => {
+export const TracerComponent = ({ data }: Props) => {
   // console.log(data);
   let textStyle: string = "";
   switch (data.priority) {
@@ -59,5 +59,3 @@ const TracerComponent = ({ data }: Props) => {
     </div>
   );
 };
-
-export default TracerComponent;

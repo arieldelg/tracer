@@ -1,2 +1,6 @@
 export * from "./Navbar/Navbar";
-// export * as LinkComponent from "./Navbar/Link";
+export * from "./Navbar/Link";
+export * from "./TracerComponent";
+export * from "./TitleOptionsTracerPage";
+export * from "./Input_Select/Select";
+export * from "./Button";

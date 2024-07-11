@@ -18,7 +18,7 @@ type Props = {
   action?: string;
 };
 
-const Button = (props: Props) => {
+export const Button = (props: Props) => {
   const router = useRouter();
 
   const handleColor = () => {
@@ -35,14 +35,6 @@ const Button = (props: Props) => {
     }
     return color;
   };
-
-  // const handleLogout = async (onclick: () => void) => {
-  //   try {
-  //     await logout();
-  //   } finally {
-  //     onclick();
-  //   }
-  // };
 
   if (props.url === "back") {
     return (
@@ -90,5 +82,3 @@ const Button = (props: Props) => {
     );
   }
 };
-
-export default Button;

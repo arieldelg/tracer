@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type SaveTracer = {
   title: string; //
   priority: string; //
@@ -50,4 +52,31 @@ export type Session = {
     id: string;
   };
   expires: string;
+};
+
+export type PropSelect = {
+  optionsSelect: string[];
+  select: {
+    title: string;
+    priority: string;
+    complete: boolean;
+    text: string;
+  };
+  setSelect: Dispatch<
+    SetStateAction<{
+      title: string;
+      priority: string;
+      complete: boolean;
+      text: string;
+    }>
+  >;
+  height: number;
+  width: string | number;
+  disable?: boolean;
+  colorTailwind?: string;
+  bgTailwind?: string;
+  color?: string;
+  backgroundColor?: string;
+  shadowTailwind?: string;
+  boxShadow?: string;
 };

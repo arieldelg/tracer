@@ -1,37 +1,11 @@
 "use client";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Option from "./Option";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
+import { PropSelect } from "@/lib/type";
 
-type PropSelect = {
-  optionsSelect: string[];
-  select: {
-    title: string;
-    priority: string;
-    complete: boolean;
-    text: string;
-  };
-  setSelect: Dispatch<
-    SetStateAction<{
-      title: string;
-      priority: string;
-      complete: boolean;
-      text: string;
-    }>
-  >;
-  height: number;
-  width: string | number;
-  disable?: boolean;
-  colorTailwind?: string;
-  bgTailwind?: string;
-  color?: string;
-  backgroundColor?: string;
-  shadowTailwind?: string;
-  boxShadow?: string;
-};
-
-const Select = (props: PropSelect) => {
+export const Select = (props: PropSelect) => {
   // ! state to control open or close options
   const [open, setOpen] = useState<boolean>(false);
   const [placeholder, setPlaceHolder] = useState<string>("");
@@ -102,5 +76,3 @@ const Select = (props: PropSelect) => {
     </section>
   );
 };
-
-export default Select;

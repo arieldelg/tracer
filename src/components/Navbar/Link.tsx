@@ -11,7 +11,7 @@ type PropsLink = {
   onClick?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const LinkComponent = (props: PropsLink) => {
+export const LinkComponent = (props: PropsLink) => {
   const [icon, setIcon] = useState<JSX.Element>();
   const [text, setText] = useState<string>();
   const [one, setOne] = useState<boolean>(false);
@@ -54,5 +54,3 @@ const LinkComponent = (props: PropsLink) => {
     </Link>
   );
 };
-
-export default LinkComponent;
